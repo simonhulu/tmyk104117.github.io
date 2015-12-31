@@ -4,7 +4,7 @@
   <title><![CDATA[My Developer Path]]></title>
   <link href="http://tmyk104117.github.io/atom.xml" rel="self"/>
   <link href="http://tmyk104117.github.io/"/>
-  <updated>2015-12-31T18:13:01+08:00</updated>
+  <updated>2015-12-31T18:14:23+08:00</updated>
   <id>http://tmyk104117.github.io/</id>
   <author>
     <name><![CDATA[张诗杰]]></name>
@@ -22,9 +22,9 @@
 1.1 首选创建一个IMP
 例如:</p>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">UIColor</span> <span class="o">*</span> <span class="n">tttttttt</span><span class="p">(</span><span class="nb">id</span> <span class="nb">self</span><span class="p">,</span><span class="no">SEL</span> <span class="n">cmd</span><span class="p">,</span><span class="no">NSString</span> <span class="o">*</span><span class="n">str</span><span class="p">){</span>
-    <span class="no">NSLog</span><span class="p">(</span><span class="err">@</span><span class="s2">&quot;%@&quot;</span><span class="p">,</span><span class="n">str</span><span class="p">);</span>
-    <span class="k">return</span> <span class="o">[</span><span class="no">UIColor</span> <span class="n">whiteColor</span><span class="o">]</span><span class="p">;</span>
+<div class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="bp">UIColor</span> <span class="o">*</span> <span class="nf">tttttttt</span><span class="p">(</span><span class="kt">id</span> <span class="nb">self</span><span class="p">,</span><span class="kt">SEL</span> <span class="n">cmd</span><span class="p">,</span><span class="bp">NSString</span> <span class="o">*</span><span class="n">str</span><span class="p">){</span>
+    <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@&quot;</span><span class="p">,</span><span class="n">str</span><span class="p">);</span>
+    <span class="k">return</span> <span class="p">[</span><span class="bp">UIColor</span> <span class="n">whiteColor</span><span class="p">];</span>
 <span class="p">}</span></code></pre></div>
 
 
