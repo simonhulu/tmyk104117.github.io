@@ -9,12 +9,10 @@
 	
 	<meta name="description" content="1.动态添加方法到某个类
 1.1 首选创建一个IMP
-例如:
-UIColor * ttt(id self,SEL cmd,NSString str){
-NSLog(@&ldquo;%@&rdquo;,str);
+例如: UIColor * tttttttt(id self,SEL cmd,NSString *str){
+NSLog(@&quot;%@&quot;,str);
 return [UIColor whiteColor];
-}
-1.2 &hellip;">
+} 1.2 &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -93,17 +91,20 @@ return [UIColor whiteColor];
 	<div class="entry-content">
 		<p>1.动态添加方法到某个类
 1.1 首选创建一个IMP
-例如:
-UIColor * ttt(id self,SEL cmd,NSString <em>str){
-NSLog(@&ldquo;%@&rdquo;,str);
-return [UIColor whiteColor];
-}
-1.2 首先获得Class实例
+例如:</p>
+
+<div class="highlight"><pre><code class="language-objective-c" data-lang="objective-c"><span class="bp">UIColor</span> <span class="o">*</span> <span class="nf">tttttttt</span><span class="p">(</span><span class="kt">id</span> <span class="nb">self</span><span class="p">,</span><span class="kt">SEL</span> <span class="n">cmd</span><span class="p">,</span><span class="bp">NSString</span> <span class="o">*</span><span class="n">str</span><span class="p">){</span>
+<span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@&quot;</span><span class="p">,</span><span class="n">str</span><span class="p">);</span>
+<span class="k">return</span> <span class="p">[</span><span class="bp">UIColor</span> <span class="n">whiteColor</span><span class="p">];</span>
+<span class="p">}</span></code></pre></div>
+
+
+<p>1.2 首先获得Class实例
 Class newClass = NSClassFromString:(@&ldquo;NSColor&rdquo;);
 1.3 运行class_addMethod方法
 class_addMethod(newClass,@selector(testMethod:),(IMP)ttt,&ldquo;@@:&rdquo;);
 id instance = [[newClass alloc]initWithDomain:@&ldquo;some domain&rdquo; code:0 userInfo:nil];
-UIColor </em>color = [instance performSelector:@selector(testMetaClass:) withObject:@&ldquo;1231111111111&rdquo;];
+UIColor *color = [instance performSelector:@selector(testMetaClass:) withObject:@&ldquo;1231111111111&rdquo;];
     NSLog(@&ldquo;%@&rdquo;,color);
 2.动态添加属性
 2.1如果实现了NSKeyValueCoding 协议可以使用
