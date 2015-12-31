@@ -93,89 +93,113 @@ xvcxcvxcvxc
 
 <p>1.2 首先获得Class实例</p>
 
-<div class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="n">Class</span> <span class="n">newClass</span> <span class="o">=</span> <span class="nl">NSClassFromString</span><span class="p">:(</span><span class="err">@</span><span class="s">&quot;NSColor&quot;</span><span class="p">);</span></code></pre></div>
+<div class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="kt">Class</span> <span class="n">newClass</span> <span class="o">=</span> <span class="nl">NSClassFromString</span><span class="p">:(</span><span class="s">@&quot;NSColor&quot;</span><span class="p">);</span></code></pre></div>
 
 
 <p>1.3 运行class_addMethod方法</p>
 
-<div class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="n">class_addMethod</span><span class="p">(</span><span class="n">newClass</span><span class="p">,</span><span class="err">@</span><span class="n">selector</span><span class="p">(</span><span class="nl">testMethod</span><span class="p">:),(</span><span class="n">IMP</span><span class="p">)</span><span class="n">ttt</span><span class="p">,</span><span class="s">&quot;@@:&quot;</span><span class="p">);</span>
-<span class="n">id</span> <span class="n">instance</span> <span class="o">=</span> <span class="p">[[</span><span class="n">newClass</span> <span class="n">alloc</span><span class="p">]</span><span class="nl">initWithDomain</span><span class="p">:</span><span class="err">@</span><span class="s">&quot;some domain&quot;</span> <span class="nl">code</span><span class="p">:</span><span class="mi">0</span> <span class="nl">userInfo</span><span class="p">:</span><span class="n">nil</span><span class="p">];</span>
-<span class="n">UIColor</span> <span class="o">*</span><span class="n">color</span> <span class="o">=</span> <span class="p">[</span><span class="n">instance</span> <span class="nl">performSelector</span><span class="p">:</span><span class="err">@</span><span class="n">selector</span><span class="p">(</span><span class="nl">testMetaClass</span><span class="p">:)</span> <span class="nl">withObject</span><span class="p">:</span><span class="err">@</span><span class="s">&quot;1231111111111&quot;</span><span class="p">];</span>
-    <span class="n">NSLog</span><span class="p">(</span><span class="err">@</span><span class="s">&quot;%@&quot;</span><span class="p">,</span><span class="n">color</span><span class="p">);</span></code></pre></div>
+<div class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="n">class_addMethod</span><span class="p">(</span><span class="n">newClass</span><span class="p">,</span><span class="k">@selector</span><span class="p">(</span><span class="nl">testMethod</span><span class="p">:),(</span><span class="kt">IMP</span><span class="p">)</span><span class="n">ttt</span><span class="p">,</span><span class="s">&quot;@@:&quot;</span><span class="p">);</span>
+<span class="kt">id</span> <span class="n">instance</span> <span class="o">=</span> <span class="p">[[</span><span class="n">newClass</span> <span class="n">alloc</span><span class="p">]</span><span class="nl">initWithDomain</span><span class="p">:</span><span class="s">@&quot;some domain&quot;</span> <span class="nl">code</span><span class="p">:</span><span class="mi">0</span> <span class="nl">userInfo</span><span class="p">:</span><span class="nb">nil</span><span class="p">];</span>
+<span class="bp">UIColor</span> <span class="o">*</span><span class="n">color</span> <span class="o">=</span> <span class="p">[</span><span class="n">instance</span> <span class="nl">performSelector</span><span class="p">:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">testMetaClass</span><span class="p">:)</span> <span class="nl">withObject</span><span class="p">:</span><span class="s">@&quot;1231111111111&quot;</span><span class="p">];</span>
+    <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@&quot;</span><span class="p">,</span><span class="n">color</span><span class="p">);</span></code></pre></div>
 
 
 <p>2.动态添加属性
-2.1如果实现了NSKeyValueCoding 协议可以使用
-[setValue:id obj forUndefinedKey:id key]和[valueForUndefinedKey:id key]配合使用
+2.1如果实现了NSKeyValueCoding 协议可以使用</p>
+
+<div class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="p">[</span><span class="nl">setValue</span><span class="p">:</span><span class="kt">id</span> <span class="n">obj</span> <span class="nl">forUndefinedKey</span><span class="p">:</span><span class="kt">id</span> <span class="n">key</span><span class="p">]</span><span class="err">和</span><span class="p">[</span><span class="nl">valueForUndefinedKey</span><span class="p">:</span><span class="kt">id</span> <span class="n">key</span><span class="p">]</span></code></pre></div>
+
+
+<p>配合使用
 2.2使用 objc_getAssociatedObject
-运行时方法，通常添加一个category来添加
-@implementation NSObject
-(ExampleCategoryWithProperty) @dynamic objectTag; - (id)objectTag {
-return objc_getAssociatedObject(self, ObjectTagKey); } -
-(void)setObjectTag:(id)newObjectTag {
-objc_setAssociatedObject(self, ObjectTagKey,
-newObject,OBJC_ASSOCIATION_RETAIN_NONATOMIC); }
-2.3
+运行时方法，通常添加一个category来添加</p>
+
+<div class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="k">@implementation</span> <span class="bp">NSObject</span>
+<span class="nl">(ExampleCategoryWithProperty)</span> <span class="k">@dynamic</span> <span class="n">objectTag</span><span class="p">;</span> <span class="o">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">objectTag</span> <span class="p">{</span>
+<span class="k">return</span> <span class="n">objc_getAssociatedObject</span><span class="p">(</span><span class="nb">self</span><span class="p">,</span> <span class="n">ObjectTagKey</span><span class="p">);</span> <span class="p">}</span> <span class="o">-</span>
+<span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nl">setObjectTag</span><span class="p">:(</span><span class="kt">id</span><span class="p">)</span><span class="n">newObjectTag</span> <span class="p">{</span>
+<span class="n">objc_setAssociatedObject</span><span class="p">(</span><span class="nb">self</span><span class="p">,</span> <span class="n">ObjectTagKey</span><span class="p">,</span>
+<span class="n">newObject</span><span class="p">,</span><span class="n">OBJC_ASSOCIATION_RETAIN_NONATOMIC</span><span class="p">);</span> <span class="p">}</span></code></pre></div>
+
+
+<p>2.3
 因为运行时不能添加实例变量,如果你有添加实例变量 可以这么做</p>
 
-<h1>include</h1>
+<div class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="cp">#include  </span>
+<span class="cp">#import  </span>
+<span class="k">@interface</span> <span class="nc">SomeClass</span> : <span class="bp">NSObject</span> <span class="p">{</span> 
+ <span class="bp">NSString</span> <span class="o">*</span><span class="n">_privateName</span><span class="p">;</span> 
+<span class="p">}</span>
+<span class="k">@end</span> 
+<span class="k">@implementation</span> <span class="nc">SomeClass</span> 
+<span class="p">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">init</span> <span class="p">{</span> 
+ <span class="nb">self</span> <span class="o">=</span> <span class="p">[</span><span class="nb">super</span> <span class="n">init</span><span class="p">];</span> 
+ <span class="k">if</span> <span class="p">(</span><span class="nb">self</span><span class="p">)</span> <span class="n">_privateName</span> <span class="o">=</span> <span class="s">@&quot;Steve&quot;</span><span class="p">;</span>
+  <span class="k">return</span> <span class="nb">self</span><span class="p">;</span> 
+<span class="p">}</span> 
+<span class="k">@end</span> 
+<span class="bp">NSString</span> <span class="o">*</span><span class="n">nameGetter</span><span class="p">(</span><span class="kt">id</span> <span class="nb">self</span><span class="p">,</span> <span class="kt">SEL</span> <span class="n">_cmd</span><span class="p">)</span> <span class="p">{</span> 
+ <span class="n">Ivar</span> <span class="n">ivar</span> <span class="o">=</span> <span class="n">class_getInstanceVariable</span><span class="p">([</span><span class="n">SomeClass</span> <span class="k">class</span><span class="p">],</span> <span class="s">&quot;_privateName&quot;</span><span class="p">);</span> 
+ <span class="k">return</span> <span class="nf">object_getIvar</span><span class="p">(</span><span class="nb">self</span><span class="p">,</span> <span class="n">ivar</span><span class="p">);</span> 
+<span class="p">}</span> 
+ <span class="kt">void</span> <span class="n">nameSetter</span><span class="p">(</span><span class="kt">id</span> <span class="nb">self</span><span class="p">,</span> <span class="kt">SEL</span> <span class="n">_cmd</span><span class="p">,</span> <span class="bp">NSString</span> <span class="o">*</span><span class="n">newName</span><span class="p">)</span> <span class="p">{</span> 
+ <span class="n">Ivar</span> <span class="n">ivar</span> <span class="o">=</span> <span class="n">class_getInstanceVariable</span><span class="p">([</span><span class="n">SomeClass</span> <span class="k">class</span><span class="p">],</span> <span class="s">&quot;_privateName&quot;</span><span class="p">);</span> 
+ <span class="kt">id</span> <span class="n">oldName</span> <span class="o">=</span> <span class="n">object_getIvar</span><span class="p">(</span><span class="nb">self</span><span class="p">,</span> <span class="n">ivar</span><span class="p">);</span> 
+ <span class="k">if</span> <span class="p">(</span><span class="n">oldName</span> <span class="o">!=</span> <span class="n">newName</span><span class="p">)</span> <span class="n">object_setIvar</span><span class="p">(</span><span class="nb">self</span><span class="p">,</span> <span class="n">ivar</span><span class="p">,</span> <span class="p">[</span><span class="n">newName</span> <span class="k">copy</span><span class="p">]);</span>
+ <span class="p">}</span>
+ <span class="kt">int</span> <span class="n">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span> 
+ <span class="k">@autoreleasepool</span> <span class="p">{</span> 
+ <span class="kt">objc_property_attribute_t</span> <span class="n">type</span> <span class="o">=</span> <span class="p">{</span> <span class="s">&quot;T&quot;</span><span class="p">,</span> <span class="s">&quot;@&quot;</span><span class="bp">NSString</span><span class="s">&quot;&quot;</span> <span class="p">};</span> 
+ <span class="kt">objc_property_attribute_t</span> <span class="n">ownership</span> <span class="o">=</span> <span class="p">{</span> <span class="s">&quot;C&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span> <span class="p">};</span> <span class="c1">// C = copy </span>
+ <span class="kt">objc_property_attribute_t</span> <span class="n">backingivar</span> <span class="o">=</span> <span class="p">{</span> <span class="s">&quot;V&quot;</span><span class="p">,</span> <span class="s">&quot;_privateName&quot;</span> <span class="p">};</span> 
+ <span class="kt">objc_property_attribute_t</span> <span class="n">attrs</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span> <span class="n">type</span><span class="p">,</span> <span class="n">ownership</span><span class="p">,</span> <span class="n">backingivar</span> <span class="p">};</span> <span class="n">class_addProperty</span><span class="p">([</span><span class="n">SomeClass</span> <span class="k">class</span><span class="p">],</span> <span class="s">&quot;name&quot;</span><span class="p">,</span> <span class="n">attrs</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span> 
+<span class="n">class_addMethod</span><span class="p">([</span><span class="n">SomeClass</span> <span class="k">class</span><span class="p">],</span> <span class="k">@selector</span><span class="p">(</span><span class="n">name</span><span class="p">),</span> <span class="p">(</span><span class="kt">IMP</span><span class="p">)</span><span class="n">nameGetter</span><span class="p">,</span> <span class="s">&quot;@@:&quot;</span><span class="p">);</span> <span class="n">class_addMethod</span><span class="p">([</span><span class="n">SomeClass</span> <span class="k">class</span><span class="p">],</span> <span class="k">@selector</span><span class="p">(</span><span class="nl">setName</span><span class="p">:),</span> <span class="p">(</span><span class="kt">IMP</span><span class="p">)</span><span class="n">nameSetter</span><span class="p">,</span> <span class="s">&quot;v@:@&quot;</span><span class="p">);</span> 
+<span class="kt">id</span> <span class="n">o</span> <span class="o">=</span> <span class="p">[</span><span class="n">SomeClass</span> <span class="n">new</span><span class="p">];</span> 
+<span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">o</span> <span class="n">name</span><span class="p">]);</span> <span class="p">[</span><span class="n">o</span> <span class="nl">setName</span><span class="p">:</span><span class="s">@&quot;Jobs&quot;</span><span class="p">];</span> <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">o</span> <span class="n">name</span><span class="p">]);</span> 
+ <span class="p">}</span> 
+<span class="p">}</span></code></pre></div>
 
-<h1>import</h1>
 
-<p>@interface SomeClass : NSObject {
- NSString <em><em>privateName;
-}
-@end
-@implementation SomeClass
-- (id)init {
- self = [super init];
- if (self) </em>privateName = @&ldquo;Steve&rdquo;;
-  return self;
-}
-@end
-NSString </em>nameGetter(id self, SEL <em>cmd) {
- Ivar ivar = class_getInstanceVariable([SomeClass class], &ldquo;</em>privateName&rdquo;);
- return object_getIvar(self, ivar);
-}
- void nameSetter(id self, SEL <em>cmd, NSString *newName) {
- Ivar ivar = class_getInstanceVariable([SomeClass class], &ldquo;</em>privateName&rdquo;);
- id oldName = object_getIvar(self, ivar);
- if (oldName != newName) object_setIvar(self, ivar, [newName copy]);
- }
- int main(void) {
- @autoreleasepool {
- objc_property_attribute_t type = { &ldquo;T&rdquo;, &ldquo;@"NSString&rdquo;&ldquo; };
- objc_property_attribute_t ownership = { "C&rdquo;, &ldquo;&rdquo; }; // C = copy
- objc_property_attribute_t backingivar = { &ldquo;V&rdquo;, &ldquo;_privateName&rdquo; };
- objc_property_attribute_t attrs[] = { type, ownership, backingivar }; class_addProperty([SomeClass class], &ldquo;name&rdquo;, attrs, 3);
-class_addMethod([SomeClass class], @selector(name), (IMP)nameGetter, &ldquo;@@:&rdquo;); class_addMethod([SomeClass class], @selector(setName:), (IMP)nameSetter, &ldquo;v@:@&rdquo;);
-id o = [SomeClass new];
-NSLog(@&ldquo;%@&rdquo;, [o name]); [o setName:@&ldquo;Jobs&rdquo;]; NSLog(@&ldquo;%@&rdquo;, [o name]);
- }
-}
-3.交换方法
-主要使用class_getInstanceMethod()获取Method实例,然后通过class_addMethod和class_replaceMethod，method_exchangeImplementations()方法来进行实现
-+(BOOL)swizzleMethod:(SEL)origSelector withMethod:(SEL)newSelector
-{
-Method origMethod = class_getInstanceMethod(self,origSelector);
-Method newMethod = class_getInstanceMethod(self,newSelector);
-if(origMethod &amp;&amp; newMethod)
-{
-if(class_addMethod(self,origSelector,method_getImplementation(newMethod),method_getTypeEncoding(newMethod)))
-{
-class_replaceMethod(self,newSelector,method_getImplementation(origMethod),methodGetTypeEncoding(origMethod));
-}else
-{
-method_exchangeImplementations(oriMethod,newMethod);
-}
-return YES ;
-}
-return NO ;
-}
-然后实现该类的+load方法 再里面调用
-+(load){
-[self swizzleMethod:@selector(sendEvent:) withMethod:@selector(swizzledSendEvent)];
-}</p>
+<p>3.交换方法
+主要使用</p>
+
+<div class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="n">class_getInstanceMethod</span><span class="p">()</span></code></pre></div>
+
+
+<p>获取Method实例,然后通过</p>
+
+<div class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="n">class_addMethod</span><span class="err">和</span><span class="n">class_replaceMethod</span><span class="err">，</span><span class="n">method_exchangeImplementations</span><span class="p">()</span></code></pre></div>
+
+
+<p>方法来进行实现</p>
+
+<div class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="p">+(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">swizzleMethod:</span><span class="p">(</span><span class="kt">SEL</span><span class="p">)</span><span class="nv">origSelector</span> <span class="nf">withMethod:</span><span class="p">(</span><span class="kt">SEL</span><span class="p">)</span><span class="nv">newSelector</span>
+<span class="p">{</span>
+<span class="n">Method</span> <span class="n">origMethod</span> <span class="o">=</span> <span class="n">class_getInstanceMethod</span><span class="p">(</span><span class="nb">self</span><span class="p">,</span><span class="n">origSelector</span><span class="p">);</span>
+<span class="n">Method</span> <span class="n">newMethod</span> <span class="o">=</span> <span class="n">class_getInstanceMethod</span><span class="p">(</span><span class="nb">self</span><span class="p">,</span><span class="n">newSelector</span><span class="p">);</span>
+<span class="k">if</span><span class="p">(</span><span class="n">origMethod</span> <span class="o">&amp;&amp;</span> <span class="n">newMethod</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="k">if</span><span class="p">(</span><span class="n">class_addMethod</span><span class="p">(</span><span class="nb">self</span><span class="p">,</span><span class="n">origSelector</span><span class="p">,</span><span class="n">method_getImplementation</span><span class="p">(</span><span class="n">newMethod</span><span class="p">),</span><span class="n">method_getTypeEncoding</span><span class="p">(</span><span class="n">newMethod</span><span class="p">)))</span>
+<span class="p">{</span>
+<span class="n">class_replaceMethod</span><span class="p">(</span><span class="nb">self</span><span class="p">,</span><span class="n">newSelector</span><span class="p">,</span><span class="n">method_getImplementation</span><span class="p">(</span><span class="n">origMethod</span><span class="p">),</span><span class="n">methodGetTypeEncoding</span><span class="p">(</span><span class="n">origMethod</span><span class="p">));</span>
+<span class="p">}</span><span class="k">else</span>
+<span class="p">{</span>
+<span class="n">method_exchangeImplementations</span><span class="p">(</span><span class="n">oriMethod</span><span class="p">,</span><span class="n">newMethod</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="k">return</span> <span class="nb">YES</span> <span class="p">;</span>
+<span class="p">}</span>
+<span class="k">return</span> <span class="nb">NO</span> <span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
+
+<p>然后实现该类的+load方法 再里面调用</p>
+
+<div class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="o">+</span><span class="p">(</span><span class="n">load</span><span class="p">){</span>
+<span class="p">[</span><span class="nb">self</span> <span class="nl">swizzleMethod</span><span class="p">:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">sendEvent</span><span class="p">:)</span> <span class="nl">withMethod</span><span class="p">:</span><span class="k">@selector</span><span class="p">(</span><span class="n">swizzledSendEvent</span><span class="p">)];</span>
+<span class="p">}</span></code></pre></div>
+
+
+
 </div>
 
 
