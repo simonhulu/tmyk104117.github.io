@@ -3,10 +3,10 @@
 # ----------------------- #
 
 url: http://tmyk104117.github.io
-title: My Octopress Blog
+title: My Developer Path
 subtitle: A blogging framework for hackers.
-author: Your Name
-simple_search: https://www.google.com/search
+author: 张诗杰
+simple_search: https://www.baidu.com
 description:
 
 # Default date format is "ordinal" (resulting in "July 22nd 2007")
