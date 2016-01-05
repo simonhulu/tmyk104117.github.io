@@ -4,7 +4,7 @@
   <title><![CDATA[My Developer Path]]></title>
   <link href="http://tmyk104117.github.io/atom.xml" rel="self"/>
   <link href="http://tmyk104117.github.io/"/>
-  <updated>2016-01-05T18:29:47+08:00</updated>
+  <updated>2016-01-05T19:40:14+08:00</updated>
   <id>http://tmyk104117.github.io/</id>
   <author>
     <name><![CDATA[张诗杰]]></name>
@@ -26,7 +26,7 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[sqlite3 in OC]]></title>
+    <title type="html"><![CDATA[Objective-C中使用sqlite3]]></title>
     <link href="http://tmyk104117.github.io/blog/2016/01/05/sqlite3-in-oc/"/>
     <updated>2016-01-05T11:39:17+08:00</updated>
     <id>http://tmyk104117.github.io/blog/2016/01/05/sqlite3-in-oc</id>
@@ -75,7 +75,7 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[OC 运行时相关知识]]></title>
+    <title type="html"><![CDATA[Objective-C 运行时相关知识]]></title>
     <link href="http://tmyk104117.github.io/blog/2015/12/31/post-title/"/>
     <updated>2015-12-31T16:08:53+08:00</updated>
     <id>http://tmyk104117.github.io/blog/2015/12/31/post-title</id>
