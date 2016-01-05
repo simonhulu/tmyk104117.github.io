@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "OC 运行时相关知识"
+title: "Objective-C 运行时相关知识"
 date: 2015-12-31 16:08:53 +0800
 comments: true
 categories: 

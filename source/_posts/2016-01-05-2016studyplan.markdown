@@ -1,0 +1,11 @@
+---
+layout: post
+title: "2016学习计划"
+date: 2016-01-05 14:27:56 +0800
+comments: true
+categories: 
+---
+打算在新的一年里面学习一下hybird开发
+打算分两步走
+1.学习hybird框架 暂定的是apache的cordova
+2.学习css
