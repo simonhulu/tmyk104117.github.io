@@ -9,7 +9,7 @@
 	
 	<meta name="description" content="1.打开数据库
 使用sqlite3_open
-2.查询数据库 每一次使用sql语句查询 使用sqlite3_prepare_v2创建一个sqlite3_stmt.然后使用sqlite3_bind_text和sqlite3_bind_int, &hellip;">
+2.查询数据库 每一次使用sql语句查询 使用sqlite3_prepare_v2创建一个sqlite3_stmt. sqlite3_stmt *stmt = NULL ; int result = sqlite3_prepare_v2(_db, &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -82,8 +82,23 @@
 	<div class="entry-content"><p>1.打开数据库
 使用sqlite3_open
 2.查询数据库
- 每一次使用sql语句查询 使用sqlite3_prepare_v2创建一个sqlite3_stmt.然后使用sqlite3_bind_text和sqlite3_bind_int,sqlite3_bind_blob插入数据到sqlite3_stmt 实例
-3 得到结果
+ 每一次使用sql语句查询 使用sqlite3_prepare_v2创建一个sqlite3_stmt.</p>
+
+<div class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="n">sqlite3_stmt</span> <span class="o">*</span><span class="n">stmt</span> <span class="o">=</span> <span class="nb">NULL</span> <span class="p">;</span>
+    <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">sqlite3_prepare_v2</span><span class="p">(</span><span class="n">_db</span><span class="p">,</span> <span class="n">sql</span><span class="p">.</span><span class="n">UTF8String</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">stmt</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">result</span> <span class="o">!=</span> <span class="n">SQLITE_OK</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">_errorLogsEnabled</span><span class="p">)</span> <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%s line:%d sqlite stmt prepare error (%d): %s&quot;</span><span class="p">,</span> <span class="n">__FUNCTION__</span><span class="p">,</span> <span class="n">__LINE__</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">sqlite3_errmsg</span><span class="p">(</span><span class="n">_db</span><span class="p">));</span>
+        <span class="k">return</span> <span class="nb">nil</span><span class="p">;</span>
+    <span class="p">}</span></code></pre></div>
+
+
+<p> 然后使用sqlite3_bind_text和sqlite3_bind_int,sqlite3_bind_blob插入数据到sqlite3_stmt 实例</p>
+
+<div class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="c1">//stmt是上文得到的stmt ,index是你需要插入的参数值的索引,key是你的参数值,-1是填入的字符长度-1表示到/0结束,NULL表示完成后如何释放</span>
+    <span class="n">sqlite3_bind_text</span><span class="p">(</span><span class="n">stmt</span><span class="p">,</span> <span class="n">index</span> <span class="p">,</span> <span class="n">key</span><span class="p">.</span><span class="n">UTF8String</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span></code></pre></div>
+
+
+<p>3 得到结果
  然后使用sqlite3_step函数执行2步骤里面的stmt ，会返回SQLITE_BUSY, SQLITE_DONE, SQLITE_ROW等消息
 如果是SQLITE_ROW 则使用sqlite3_column_text或者其他类型的sqlite3_column得到返回的这一row的对应的值</p>
 
