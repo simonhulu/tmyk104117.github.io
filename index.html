@@ -7,7 +7,8 @@
 	<meta name="author" content="张诗杰">
 
 	
-	<meta name="description" content=" Jan 8th, 2016 Comments ">
+	<meta name="description" content="该文件定义了一个宏,用来显示过期了的api,先判断是否是clang编译器 #ifdef __clang__
+#define CDV_DEPRECATED(version, msg) __attribute__((deprecated(&quot;Deprecated in Cordova & &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -83,10 +84,34 @@
 		
 		<a href="/blog/2016/01/08/cordova/">
 		
-			Cordova学习</a>
+			cordova学习之CDVAvailabilityDeprecated.h</a>
 	</h2>
 	<div class="entry-content">
-		
+		<p>该文件定义了一个宏,用来显示过期了的api,先判断是否是clang编译器</p>
+
+<div class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="cp">#ifdef __clang__</span>
+<span class="cp">#define CDV_DEPRECATED(version, msg) __attribute__((deprecated(&quot;Deprecated in Cordova &quot; #version &quot;. &quot; msg)))</span>
+<span class="cp">#else</span>
+<span class="cp">#define CDV_DEPRECATED(version, msg) __attribute__((deprecated()))</span>
+<span class="cp">#endif</span></code></pre></div>
+
+
+<p>然后声明了两个内联函数 CDV_IsIPad,CDV_IsIPhone5判断设备,我们可以学习到 如何声明一个过期的api</p>
+
+<div class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="k">static</span> <span class="kr">inline</span> <span class="kt">BOOL</span> <span class="nf">CDV_IsIPad</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="n">CDV_DEPRECATED</span><span class="p">(</span><span class="mf">3.7.0</span><span class="p">,</span> <span class="s">&quot;This will be removed in 4.0.0&quot;</span><span class="p">);</span>
+<span class="k">static</span> <span class="kr">inline</span> <span class="kt">BOOL</span> <span class="nf">CDV_IsIPhone5</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="n">CDV_DEPRECATED</span><span class="p">(</span><span class="mf">3.7.0</span><span class="p">,</span> <span class="s">&quot;This will be removed in 4.0.0&quot;</span><span class="p">);</span></code></pre></div>
+
+
+<p>然后还可以学习到如何判断ipad和特定的iphone</p>
+
+<div class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="k">static</span> <span class="kr">inline</span> <span class="kt">BOOL</span> <span class="nf">CDV_IsIPad</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">[[</span><span class="bp">UIDevice</span> <span class="n">currentDevice</span><span class="p">]</span> <span class="nl">respondsToSelector</span><span class="p">:</span><span class="k">@selector</span><span class="p">(</span><span class="n">userInterfaceIdiom</span><span class="p">)]</span> <span class="o">&amp;&amp;</span> <span class="p">[[</span><span class="bp">UIDevice</span> <span class="n">currentDevice</span><span class="p">]</span> <span class="n">userInterfaceIdiom</span><span class="p">]</span> <span class="o">==</span> <span class="n">UIUserInterfaceIdiomPad</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">static</span> <span class="kr">inline</span> <span class="kt">BOOL</span> <span class="nf">CDV_IsIPhone5</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">([[</span><span class="bp">UIScreen</span> <span class="n">mainScreen</span><span class="p">]</span> <span class="n">bounds</span><span class="p">].</span><span class="n">size</span><span class="p">.</span><span class="n">width</span> <span class="o">==</span> <span class="mi">568</span> <span class="o">&amp;&amp;</span> <span class="p">[[</span><span class="bp">UIScreen</span> <span class="n">mainScreen</span><span class="p">]</span> <span class="n">bounds</span><span class="p">].</span><span class="n">size</span><span class="p">.</span><span class="n">height</span> <span class="o">==</span> <span class="mi">320</span><span class="p">)</span> <span class="o">||</span> <span class="p">([[</span><span class="bp">UIScreen</span> <span class="n">mainScreen</span><span class="p">]</span> <span class="n">bounds</span><span class="p">].</span><span class="n">size</span><span class="p">.</span><span class="n">height</span> <span class="o">==</span> <span class="mi">568</span> <span class="o">&amp;&amp;</span> <span class="p">[[</span><span class="bp">UIScreen</span> <span class="n">mainScreen</span><span class="p">]</span> <span class="n">bounds</span><span class="p">].</span><span class="n">size</span><span class="p">.</span><span class="n">width</span> <span class="o">==</span> <span class="mi">320</span><span class="p">);</span>
+<span class="p">}</span></code></pre></div>
+
 
 		
 		
