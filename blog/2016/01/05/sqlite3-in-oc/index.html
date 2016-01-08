@@ -1,0 +1,197 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Objective-C中使用sqlite3 - My Developer Path</title>
+	<meta name="author" content="张诗杰">
+
+	
+	<meta name="description" content="1.打开数据库
+使用sqlite3_open
+2.查询数据库 每一次使用sql语句查询 使用sqlite3_prepare_v2创建一个sqlite3_stmt. sqlite3_stmt *stmt = NULL ; int result = sqlite3_prepare_v2(_db, &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="My Developer Path" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	 <link href="/stylesheets/pygments.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+</head>
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">My Developer Path</a></h1>
+<nav id="main-nav"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="https://www.baidu.com" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:tmyk104117.github.io">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		
+    
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+    
+	</div>
+	<form class="search" action="https://www.baidu.com" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:tmyk104117.github.io">
+	</form>
+</nav>
+
+
+	</header>
+	
+		
+	
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">Objective-C中使用sqlite3</h2>
+	<div class="entry-content"><p>1.打开数据库
+使用sqlite3_open
+2.查询数据库
+ 每一次使用sql语句查询 使用sqlite3_prepare_v2创建一个sqlite3_stmt.</p>
+
+<div class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="n">sqlite3_stmt</span> <span class="o">*</span><span class="n">stmt</span> <span class="o">=</span> <span class="nb">NULL</span> <span class="p">;</span>
+    <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">sqlite3_prepare_v2</span><span class="p">(</span><span class="n">_db</span><span class="p">,</span> <span class="n">sql</span><span class="p">.</span><span class="n">UTF8String</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">stmt</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">result</span> <span class="o">!=</span> <span class="n">SQLITE_OK</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">_errorLogsEnabled</span><span class="p">)</span> <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%s line:%d sqlite stmt prepare error (%d): %s&quot;</span><span class="p">,</span> <span class="n">__FUNCTION__</span><span class="p">,</span> <span class="n">__LINE__</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">sqlite3_errmsg</span><span class="p">(</span><span class="n">_db</span><span class="p">));</span>
+        <span class="k">return</span> <span class="nb">nil</span><span class="p">;</span>
+    <span class="p">}</span></code></pre></div>
+
+
+<p> 然后使用sqlite3_bind_text和sqlite3_bind_int,sqlite3_bind_blob插入数据到sqlite3_stmt 实例</p>
+
+<div class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="c1">//stmt是上文得到的stmt ,index是你需要插入的参数值的索引,key是你的参数值,-1是填入的字符长度-1表示到/0结束,NULL表示完成后如何释放</span>
+    <span class="n">sqlite3_bind_text</span><span class="p">(</span><span class="n">stmt</span><span class="p">,</span> <span class="n">index</span> <span class="p">,</span> <span class="n">key</span><span class="p">.</span><span class="n">UTF8String</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span></code></pre></div>
+
+
+<p>3 得到结果
+ 然后使用sqlite3_step函数执行2步骤里面的stmt ，会返回SQLITE_BUSY, SQLITE_DONE, SQLITE_ROW等消息
+如果是SQLITE_ROW 则使用sqlite3_column_text或者其他类型的sqlite3_column得到返回的这一row的对应的值</p>
+
+<div class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="k">do</span><span class="p">{</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">sqlite3_step</span><span class="p">(</span><span class="n">stmt</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">result</span> <span class="o">==</span> <span class="n">SQLITE_ROW</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">//得到这一行的数据</span>
+            <span class="kt">char</span> <span class="o">*</span><span class="n">key</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="n">sqlite3_column_text</span><span class="p">(</span><span class="n">stmt</span><span class="p">,</span> <span class="n">i</span><span class="o">++</span><span class="p">);</span>
+            <span class="kt">char</span> <span class="o">*</span><span class="n">filename</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="n">sqlite3_column_text</span><span class="p">(</span><span class="n">stmt</span><span class="p">,</span> <span class="n">i</span><span class="o">++</span><span class="p">);</span>
+            <span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="n">sqlite3_column_int</span><span class="p">(</span><span class="n">stmt</span><span class="p">,</span> <span class="n">i</span><span class="o">++</span><span class="p">);</span>
+        <span class="p">}</span><span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">result</span> <span class="o">==</span> <span class="n">SQLITE_DONE</span><span class="p">){</span>
+            <span class="c1">//完成</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+            <span class="c1">//error</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span><span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span></code></pre></div>
+
+
+
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+Jan 5th, 2016</div>
+	<div class="tags">
+
+</div>
+	
+	<div class="comments"><a href="#disqus_thread">Comments</a></div>
+	
+</div>
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+		
+		
+		<a class="addthis_button_tweet"></a>
+		
+		
+		
+	</div>
+	
+</div>
+
+
+
+<section id="comment">
+    <h2 class="title">Comments</h2>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+	<footer id="footer" class="inner">Copyright &copy; 2016
+
+    张诗杰
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'qizhangblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://tmyk104117.github.io/blog/2016/01/05/sqlite3-in-oc/';
+        var disqus_url = 'http://tmyk104117.github.io/blog/2016/01/05/sqlite3-in-oc/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//go.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+</body>
+</html>
