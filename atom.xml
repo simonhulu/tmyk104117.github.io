@@ -4,7 +4,7 @@
   <title><![CDATA[My Developer Path]]></title>
   <link href="http://tmyk104117.github.io/atom.xml" rel="self"/>
   <link href="http://tmyk104117.github.io/"/>
-  <updated>2016-01-08T13:12:10+08:00</updated>
+  <updated>2016-01-08T13:13:09+08:00</updated>
   <id>http://tmyk104117.github.io/</id>
   <author>
     <name><![CDATA[张诗杰]]></name>
@@ -20,16 +20,13 @@
     <id>http://tmyk104117.github.io/blog/2016/01/08/uiviewcontroller-lifecycle</id>
     <content type="html"><![CDATA[<p>UIViewController可能是IOS SDK里面用到最多的Object了,所以很重要的是去理解生命周期事件和怎样去使用它们</p>
 
-<ul>
-<li>生命周期 事件顺序</li>
-<li>-(void)loadView</li>
-<li>-(void)viewDidLoad</li>
-<li>-(void)viewWillAppear</li>
-<li>-(void)viewWillLayoutSubviews</li>
-<li>-(void)viewDidLayoutSubviews</li>
-<li>-(void)viewDidAppear</li>
-</ul>
-
+<p><strong>生命周期事件顺序</strong>
+1. -(void)loadView
+2. -(void)viewDidLoad
+3. -(void)viewWillAppear
+4. -(void)viewWillLayoutSubviews
+5. -(void)viewDidLayoutSubviews
+6. -(void)viewDidAppear</p>
 
 <p>*我们在这些事件里面应该干什么呢?</p>
 ]]></content>
