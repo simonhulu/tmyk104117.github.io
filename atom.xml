@@ -4,7 +4,7 @@
   <title><![CDATA[My Developer Path]]></title>
   <link href="http://tmyk104117.github.io/atom.xml" rel="self"/>
   <link href="http://tmyk104117.github.io/"/>
-  <updated>2016-01-08T10:27:02+08:00</updated>
+  <updated>2016-01-08T11:39:15+08:00</updated>
   <id>http://tmyk104117.github.io/</id>
   <author>
     <name><![CDATA[张诗杰]]></name>
@@ -12,6 +12,16 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[IOS UIViewController 的生命周期]]></title>
+    <link href="http://tmyk104117.github.io/blog/2016/01/08/uiviewcontroller-lifecycle/"/>
+    <updated>2016-01-08T11:28:14+08:00</updated>
+    <id>http://tmyk104117.github.io/blog/2016/01/08/uiviewcontroller-lifecycle</id>
+    <content type="html"><![CDATA[<p>UIViewController可能是IOS SDK里面用到最多的Object了,所以很重要的是去理解生命周期事件和怎样去使用它们
+===> Lifecycle events order===</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[cordova学习之CDVAvailabilityDeprecated.h]]></title>
