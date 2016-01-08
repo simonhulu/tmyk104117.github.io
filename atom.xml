@@ -4,7 +4,7 @@
   <title><![CDATA[My Developer Path]]></title>
   <link href="http://tmyk104117.github.io/atom.xml" rel="self"/>
   <link href="http://tmyk104117.github.io/"/>
-  <updated>2016-01-05T19:43:46+08:00</updated>
+  <updated>2016-01-08T10:14:49+08:00</updated>
   <id>http://tmyk104117.github.io/</id>
   <author>
     <name><![CDATA[张诗杰]]></name>
@@ -12,6 +12,15 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[cordova学习]]></title>
+    <link href="http://tmyk104117.github.io/blog/2016/01/08/cordova/"/>
+    <updated>2016-01-08T10:14:24+08:00</updated>
+    <id>http://tmyk104117.github.io/blog/2016/01/08/cordova</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[2016学习计划]]></title>
