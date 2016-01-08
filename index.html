@@ -7,7 +7,7 @@
 	<meta name="author" content="张诗杰">
 
 	
-	<meta name="description" content="UIViewController可能是IOS SDK里面用到最多的Object了,所以很重要的是去理解生命周期事件和怎样去使用它们 生命周期事件顺序 1. -(void)loadView 2. -(void)viewDidLoad 3. -(void)viewWillAppear 4. -( &hellip;">
+	<meta name="description" content="UIViewController可能是IOS SDK里面用到最多的Object了,所以很重要的是去理解生命周期事件和怎样去使用它们 1.生命周期事件顺序 1. -(void)loadView 2. -(void)viewDidLoad 3. -(void)viewWillAppear 4. -( &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -88,7 +88,7 @@
 	<div class="entry-content">
 		<p>UIViewController可能是IOS SDK里面用到最多的Object了,所以很重要的是去理解生命周期事件和怎样去使用它们</p>
 
-<p><strong> 生命周期事件顺序 </strong>    <br/>
+<p><strong> 1.生命周期事件顺序 </strong>    <br/>
 1. -(void)loadView <br/>
 2. -(void)viewDidLoad  <br/>
 3. -(void)viewWillAppear   <br/>
@@ -96,7 +96,9 @@
 5. -(void)viewDidLayoutSubviews     <br/>
 6. -(void)viewDidAppear</p>
 
-<p><strong>我们在这些事件里面应该干什么呢?</strong></p>
+<p><strong> 2.我们在这些事件里面应该干什么呢? </strong>
+-(void)loadView&mdash;&ndash;创建controller管理的views
+这个函数只有在view controller创建程序完成时才会调用,你可以覆盖该方法去手动创建你自己的子view</p>
 
 		
 		
