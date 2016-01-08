@@ -4,7 +4,7 @@
   <title><![CDATA[My Developer Path]]></title>
   <link href="http://tmyk104117.github.io/atom.xml" rel="self"/>
   <link href="http://tmyk104117.github.io/"/>
-  <updated>2016-01-08T13:18:52+08:00</updated>
+  <updated>2016-01-08T13:19:43+08:00</updated>
   <id>http://tmyk104117.github.io/</id>
   <author>
     <name><![CDATA[张诗杰]]></name>
@@ -28,7 +28,7 @@
 5. -(void)viewDidLayoutSubviews     <br/>
 6. -(void)viewDidAppear</p>
 
-<p>*我们在这些事件里面应该干什么呢?</p>
+<p><strong>我们在这些事件里面应该干什么呢?</strong></p>
 ]]></content>
   </entry>
   
