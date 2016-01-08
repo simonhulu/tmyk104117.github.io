@@ -4,7 +4,7 @@
   <title><![CDATA[My Developer Path]]></title>
   <link href="http://tmyk104117.github.io/atom.xml" rel="self"/>
   <link href="http://tmyk104117.github.io/"/>
-  <updated>2016-01-08T13:24:33+08:00</updated>
+  <updated>2016-01-08T15:03:25+08:00</updated>
   <id>http://tmyk104117.github.io/</id>
   <author>
     <name><![CDATA[张诗杰]]></name>
@@ -28,9 +28,11 @@
 5. -(void)viewDidLayoutSubviews     <br/>
 6. -(void)viewDidAppear</p>
 
-<p><strong> 2.我们在这些事件里面应该干什么呢? </strong>
--(void)loadView&mdash;&ndash;创建controller管理的views
-这个函数只有在view controller创建程序完成时才会调用,你可以覆盖该方法去手动创建你自己的子view</p>
+<p><strong> 2.我们在这些事件里面应该干什么呢? </strong>   <br/>
++ -(void)loadView&mdash;&ndash;创建controller管理的views
+这个函数只有在view controller创建程序完成时才会调用,你可以覆盖该方法去手动创建你自己的子view
++ -(void)viewDidLoad 当view被load进内存的时候调用
+当viewController的view创建时调用,记住这个时候view的bounds还不是最终的值，这里是做初始化init和启动一些object的好地方</p>
 ]]></content>
   </entry>
   
