@@ -1,7 +1,30 @@
 ---
 layout: post
-title: "cordova学习"
+title: "cordova学习之CDVAvailabilityDeprecated.h"
 date: 2016-01-08 10:14:24 +0800
 comments: true
 categories: 
 ---
+该文件定义了一个宏,用来显示过期了的api,先判断是否是clang编译器
+{% highlight objc %}
+#ifdef __clang__
+#define CDV_DEPRECATED(version, msg) __attribute__((deprecated("Deprecated in Cordova " #version ". " msg)))
+#else
+#define CDV_DEPRECATED(version, msg) __attribute__((deprecated()))
+#endif
+{% endhighlight %}
+然后声明了两个内联函数 CDV_IsIPad,CDV_IsIPhone5判断设备,我们可以学习到 如何声明一个过期的api
+{% highlight objc %}
+static inline BOOL CDV_IsIPad(void) CDV_DEPRECATED(3.7.0, "This will be removed in 4.0.0");
+static inline BOOL CDV_IsIPhone5(void) CDV_DEPRECATED(3.7.0, "This will be removed in 4.0.0");
+{% endhighlight %}
+然后还可以学习到如何判断ipad和特定的iphone
+{% highlight objc %}
+static inline BOOL CDV_IsIPad(void) {
+    return [[UIDevice currentDevice] respondsToSelector:@selector(userInterfaceIdiom)] && [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad;
+}
+
+static inline BOOL CDV_IsIPhone5(void) {
+    return ([[UIScreen mainScreen] bounds].size.width == 568 && [[UIScreen mainScreen] bounds].size.height == 320) || ([[UIScreen mainScreen] bounds].size.height == 568 && [[UIScreen mainScreen] bounds].size.width == 320);
+}
+{% endhighlight %}
