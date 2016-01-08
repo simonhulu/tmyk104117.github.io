@@ -7,11 +7,11 @@
 	<meta name="author" content="张诗杰">
 
 	
-	<meta name="description" content="UIViewController可能是IOS SDK里面用到最多的Object了,所以很重要的是去理解生命周期事件和怎样去使用它们 *生命周期 事件顺序
-1. -(void)loadView
-2. -(void)viewDidLoad
-3. -(void)viewWillAppear
-4. -( &hellip;">
+	<meta name="description" content="UIViewController可能是IOS SDK里面用到最多的Object了,所以很重要的是去理解生命周期事件和怎样去使用它们 生命周期 事件顺序
+-(void)loadView
+-(void)viewDidLoad
+-(void)viewWillAppear
+-(void) &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -83,13 +83,16 @@
 	<h2 class="title">IOS UIViewController 的生命周期</h2>
 	<div class="entry-content"><p>UIViewController可能是IOS SDK里面用到最多的Object了,所以很重要的是去理解生命周期事件和怎样去使用它们</p>
 
-<p>*生命周期 事件顺序
-1. -(void)loadView
-2. -(void)viewDidLoad
-3. -(void)viewWillAppear
-4. -(void)viewWillLayoutSubviews
-5. -(void)viewDidLayoutSubviews
-6. -(void)viewDidAppear</p>
+<ul>
+<li>生命周期 事件顺序</li>
+<li>-(void)loadView</li>
+<li>-(void)viewDidLoad</li>
+<li>-(void)viewWillAppear</li>
+<li>-(void)viewWillLayoutSubviews</li>
+<li>-(void)viewDidLayoutSubviews</li>
+<li>-(void)viewDidAppear</li>
+</ul>
+
 
 <p>*我们在这些事件里面应该干什么呢?</p>
 </div>
