@@ -7,7 +7,8 @@
 	<meta name="author" content="张诗杰">
 
 	
-	<meta name="description" content="UIViewController可能是IOS SDK里面用到最多的Object了,所以很重要的是去理解生命周期事件和怎样去使用它们 1.生命周期事件顺序 1. -(void)loadView 2. -(void)viewDidLoad 3. -(void)viewWillAppear 4. -( &hellip;">
+	<meta name="description" content="该文件定义了跟json解析相关的工作代码,我们来学习一下它内部的实现 #import &quot;CDVAvailabilityDeprecated.h&quot; @interface NSArray (CDVJSONSerializing)
+-(NSString *)JSONString &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -81,6 +82,93 @@
     <article class="post">
 	<h2 class="title">
 		
+		<a href="/blog/2016/01/11/learn-cordova-cdvjson/">
+		
+			cordova学习之CDVJSON</a>
+	</h2>
+	<div class="entry-content">
+		<p>该文件定义了跟json解析相关的工作代码,我们来学习一下它内部的实现</p>
+
+<div class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="cp">#import &quot;CDVAvailabilityDeprecated.h&quot;</span>
+
+<span class="k">@interface</span> <span class="bp">NSArray</span> <span class="nl">(CDVJSONSerializing)</span>
+<span class="p">-(</span><span class="bp">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nf">JSONString</span> <span class="n">CDV_DEPRECATED</span><span class="p">(</span><span class="mf">3.8</span> <span class="mf">.0</span><span class="p">,</span> <span class="s">&quot;Use NSJSONSerialization instead.&quot;</span><span class="p">);</span>
+<span class="k">@end</span>
+
+<span class="k">@interface</span> <span class="bp">NSDictionary</span> <span class="nl">(CDVJSONSerializing)</span>
+<span class="p">-(</span><span class="bp">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nf">JSONString</span> <span class="n">CDV_DEPRECATED</span><span class="p">(</span><span class="mf">3.8</span> <span class="mf">.0</span><span class="p">,</span> <span class="s">&quot;Use NSJSONSerialization instead.&quot;</span><span class="p">);</span>
+<span class="k">@end</span>
+
+<span class="k">@interface</span> <span class="bp">NSString</span> <span class="nl">(CDVJSONSerializing)</span>
+<span class="p">-(</span><span class="kt">id</span><span class="p">)</span><span class="nf">JSONObject</span> <span class="n">CDV_DEPRECATED</span><span class="p">(</span><span class="mf">3.8</span> <span class="mf">.0</span><span class="p">,</span> <span class="s">&quot;Use NSJSONSerialization instead.&quot;</span><span class="p">);</span>
+
+<span class="p">-(</span><span class="kt">id</span><span class="p">)</span><span class="nf">JSONFragment</span> <span class="n">CDV_DEPRECATED</span><span class="p">(</span><span class="mf">3.8</span> <span class="mf">.0</span><span class="p">,</span> <span class="s">&quot;Use NSJSONSerialization instead.&quot;</span><span class="p">);</span>
+<span class="k">@end</span></code></pre></div>
+
+
+<p>1.它首先引用了CDVAvailabilityDeprecated.h,这个上篇blog讲过
+2.接下来它定义了NSArray,NSdictionary,NSString的category,声明了跟json相关的api
+为我们来看看它具体的实现</p>
+
+<div class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="cp">#import &quot;CDVJSON_private.h&quot;</span>
+
+<span class="k">@implementation</span> <span class="bp">NSArray</span> <span class="nl">(CDVJSONSerializing)</span>
+
+<span class="p">-(</span><span class="bp">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nf">JSONString</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="p">[</span><span class="nb">self</span> <span class="n">cdv_JSONString</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="k">@end</span>
+
+<span class="k">@implementation</span> <span class="bp">NSDictionary</span> <span class="nl">(CDVJSONSerializing)</span>
+
+<span class="p">-(</span><span class="bp">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nf">JSONString</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="p">[</span><span class="nb">self</span> <span class="n">cdv_JSONString</span><span class="p">]</span> <span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">@end</span>
+
+<span class="k">@implementation</span> <span class="bp">NSString</span> <span class="nl">(CDVJSONSerializing)</span>
+
+<span class="p">-(</span><span class="kt">id</span><span class="p">)</span><span class="nf">JSONObject</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="p">[</span><span class="nb">self</span> <span class="n">cdv_JSONObject</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="p">-(</span><span class="kt">id</span><span class="p">)</span><span class="nf">JSONFragment</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="p">[</span><span class="nb">self</span> <span class="n">cdv_JSONFragment</span><span class="p">];</span>  
+<span class="p">}</span>
+<span class="k">@end</span></code></pre></div>
+
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+Jan 11th, 2016</div>
+	<div class="tags">
+
+</div>
+	
+	<div class="comments"><a href="/blog/2016/01/11/learn-cordova-cdvjson/#disqus_thread">Comments</a></div>
+	
+</div>
+</article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
 		<a href="/blog/2016/01/08/uiviewcontroller-lifecycle/">
 		
 			IOS UIViewController 的生命周期</a>
@@ -89,25 +177,93 @@
 		<p>UIViewController可能是IOS SDK里面用到最多的Object了,所以很重要的是去理解生命周期事件和怎样去使用它们</p>
 
 <p><strong> 1.生命周期事件顺序 </strong>    <br/>
-1. -(void)loadView <br/>
-2. -(void)viewDidLoad  <br/>
-3. -(void)viewWillAppear   <br/>
-4. -(void)viewWillLayoutSubviews     <br/>
-5. -(void)viewDidLayoutSubviews     <br/>
-6. -(void)viewDidAppear</p>
+1.</p>
+
+<div class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="p">-(</span><span class="kt">void</span><span class="p">)</span><span class="nf">loadView</span></code></pre></div>
+
+
+<ol>
+<li></li>
+</ol>
+
+
+<div class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="p">-(</span><span class="kt">void</span><span class="p">)</span><span class="nf">viewDidLoad</span></code></pre></div>
+
+
+<ol>
+<li></li>
+</ol>
+
+
+<div class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="p">-(</span><span class="kt">void</span><span class="p">)</span><span class="nf">viewWillAppear</span></code></pre></div>
+
+
+<ol>
+<li></li>
+</ol>
+
+
+<div class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="p">-(</span><span class="kt">void</span><span class="p">)</span><span class="nf">viewWillLayoutSubviews</span></code></pre></div>
+
+
+<ol>
+<li></li>
+</ol>
+
+
+<div class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="p">-(</span><span class="kt">void</span><span class="p">)</span><span class="nf">viewDidLayoutSubviews</span></code></pre></div>
+
+
+<ol>
+<li></li>
+</ol>
+
+
+<div class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="p">-(</span><span class="kt">void</span><span class="p">)</span><span class="nf">viewDidAppear</span></code></pre></div>
+
 
 <p><strong> 2.我们在这些事件里面应该干什么呢? </strong>   <br/>
-* -(void)loadView&mdash;&ndash;创建controller管理的views<br/>
+*</p>
+
+<div class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="p">-(</span><span class="kt">void</span><span class="p">)</span><span class="nf">loadView</span></code></pre></div>
+
+
+<p>&mdash;&ndash;创建controller管理的views<br/>
       这个函数只有在view controller创建程序完成时才会调用,你可以覆盖该方法去手动创建你自己的子view     <br/>
-* -(void)viewDidLoad&mdash;&ndash;当view被load进内存的时候调用<br/>
+*</p>
+
+<div class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="p">-(</span><span class="kt">void</span><span class="p">)</span><span class="nf">viewDidLoad</span></code></pre></div>
+
+
+<p>&mdash;&ndash;当view被load进内存的时候调用<br/>
       当viewController的view创建时调用,记住这个时候view的bounds还不是最终的值，这里是做初始化init和启动一些object的好地方<br/>
-* -(void)viewWillAppear:(BOOL)animated&mdash;-通知view controller     它的view被添加到view显示树上 <br/>
+*</p>
+
+<div class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="p">-(</span><span class="kt">void</span><span class="p">)</span><span class="nf">viewWillAppear</span></code></pre></div>
+
+
+<p>&mdash;-通知view controller   它的view被添加到view显示树上 <br/>
       当view被显示到屏幕上的时候被调用,这个时候view的bounds已经被确定了,但是旋转方向还没有确定,这个函数每次被显示的时候都会被调用，这里不要放那些只需要执行一次的代码   <br/>
-* -(void)viewWillLayoutSubviews&mdash;- 通知view controller布局它的subviews    <br/>
+*</p>
+
+<div class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="p">-(</span><span class="kt">void</span><span class="p">)</span><span class="nf">viewWillLayoutSubviews</span></code></pre></div>
+
+
+<p>&mdash;- 通知view controller布局它的subviews    <br/>
       这个方法在每次frame变化时或者方向旋转时都会被标记为需要layout,这是<strong>bounds被确定的的第一步</strong>如果你没有使用自动布局或者你可以在这里改变你subviews的布局       <br/>
-* -(void)viewDidLayoutSubviews&mdash;-通知view controller它已经布局了它的subviews   <br/>
+*</p>
+
+<div class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="p">-(</span><span class="kt">void</span><span class="p">)</span><span class="nf">viewDidLayoutSubviews</span></code></pre></div>
+
+
+<p>&mdash;-通知view controller它已经布局了它的subviews   <br/>
       你可以在这里添加一些改变布局的代码  <br/>
-* -(void)viewDidAppear:(BOOL)animated &mdash;-通知view controller 被添加到显示树
+*</p>
+
+<div class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="p">-(</span><span class="kt">void</span><span class="p">)</span><span class="nf">viewDidAppear</span></code></pre></div>
+
+
+<p> &mdash;-通知view controller 被添加到显示树
       这里是一个执行跟显示view相关额外任务的好地方,例如动画,这个方法会在显示动画完成调用,所以到了这一步view已经被用户看到了,在某些情况下,这里还是load data和send request的好地方</p>
 
 		
