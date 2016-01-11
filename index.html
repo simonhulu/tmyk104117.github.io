@@ -144,6 +144,90 @@
 <span class="k">@end</span></code></pre></div>
 
 
+<p>2.很显然,它调用的是CDVJSON_private.h的具体实现</p>
+
+<div class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="cp">#import &quot;CDVJSON_private.h&quot;</span>
+<span class="cp">#import &lt;Foundation/Foundation.h&gt;</span>
+<span class="k">@implementation</span> <span class="bp">NSArray</span> <span class="nl">(CDVJSONSerializingPrivate)</span>
+<span class="p">-(</span><span class="bp">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nf">cdv_JSONString</span>
+<span class="p">{</span>
+    <span class="bp">NSError</span> <span class="o">*</span><span class="n">error</span> <span class="o">=</span> <span class="nb">nil</span> <span class="p">;</span>
+    <span class="bp">NSData</span> <span class="o">*</span><span class="n">jsonData</span> <span class="o">=</span> <span class="p">[</span><span class="bp">NSJSONSerialization</span> <span class="nl">dataWithJSONObject</span><span class="p">:</span><span class="nb">self</span> <span class="nl">options</span><span class="p">:</span><span class="mi">0</span> <span class="nl">error</span><span class="p">:</span><span class="o">&amp;</span><span class="n">error</span><span class="p">];</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">error</span> <span class="o">!=</span> <span class="nb">nil</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;NSArray JSONString error: %@&quot;</span><span class="p">,[</span><span class="n">error</span> <span class="n">localizedDescription</span><span class="p">]);</span>
+        <span class="k">return</span> <span class="nb">nil</span><span class="p">;</span>
+    <span class="p">}</span><span class="k">else</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="p">[[</span><span class="bp">NSString</span> <span class="n">alloc</span><span class="p">]</span><span class="nl">initWithData</span><span class="p">:</span><span class="n">jsonData</span> <span class="nl">encoding</span><span class="p">:</span><span class="n">NSUTF8StringEncoding</span><span class="p">];</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">@end</span>
+
+<span class="k">@implementation</span> <span class="bp">NSDictionary</span> <span class="nl">(CDVJSONSerializingPrivate)</span>
+<span class="p">-(</span><span class="bp">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nf">cdv_JSONString</span>
+<span class="p">{</span>
+    <span class="bp">NSError</span> <span class="o">*</span><span class="n">error</span> <span class="o">=</span> <span class="nb">nil</span> <span class="p">;</span>
+    <span class="bp">NSData</span> <span class="o">*</span><span class="n">jsonData</span> <span class="o">=</span> <span class="p">[</span><span class="bp">NSJSONSerialization</span> <span class="nl">dataWithJSONObject</span><span class="p">:</span><span class="nb">self</span> <span class="nl">options</span><span class="p">:</span><span class="n">NSJSONWritingPrettyPrinted</span> <span class="nl">error</span><span class="p">:</span><span class="o">&amp;</span><span class="n">error</span><span class="p">];</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">error</span> <span class="o">!=</span> <span class="nb">nil</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;NSDictionary JSONString error: %@&quot;</span><span class="p">,[</span><span class="n">error</span> <span class="n">localizedDescription</span><span class="p">]);</span>
+        <span class="k">return</span> <span class="nb">nil</span><span class="p">;</span>
+    <span class="p">}</span><span class="k">else</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="p">[[</span><span class="bp">NSString</span> <span class="n">alloc</span><span class="p">]</span><span class="nl">initWithData</span><span class="p">:</span><span class="n">jsonData</span> <span class="nl">encoding</span><span class="p">:</span><span class="n">NSUTF8StringEncoding</span><span class="p">];</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">@end</span>
+
+<span class="k">@implementation</span> <span class="bp">NSString</span> <span class="nl">(CDVJSONSerializingPrivate)</span>
+
+<span class="p">-(</span><span class="kt">id</span><span class="p">)</span><span class="nf">cdv_JSONObject</span>
+<span class="p">{</span>
+    <span class="bp">NSError</span> <span class="o">*</span><span class="n">error</span> <span class="o">=</span> <span class="nb">nil</span> <span class="p">;</span>
+    <span class="kt">id</span> <span class="n">object</span> <span class="o">=</span> <span class="p">[</span><span class="bp">NSJSONSerialization</span> <span class="nl">JSONObjectWithData</span><span class="p">:[</span><span class="nb">self</span> <span class="nl">dataUsingEncoding</span><span class="p">:</span><span class="n">NSUTF8StringEncoding</span><span class="p">]</span> <span class="nl">options</span><span class="p">:</span><span class="n">NSJSONReadingMutableContainers</span> <span class="nl">error</span><span class="p">:</span><span class="o">&amp;</span><span class="n">error</span><span class="p">];</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">error</span> <span class="o">!=</span> <span class="nb">nil</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;NSDictionary JSONString error: %@&quot;</span><span class="p">,[</span><span class="n">error</span> <span class="n">localizedDescription</span><span class="p">]);</span>
+        <span class="k">return</span> <span class="nb">nil</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">object</span> <span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">-(</span><span class="kt">id</span><span class="p">)</span><span class="nf">cdv_JSONFragment</span>
+<span class="p">{</span>
+    <span class="bp">NSError</span> <span class="o">*</span><span class="n">error</span> <span class="o">=</span> <span class="nb">nil</span> <span class="p">;</span>
+    <span class="kt">id</span> <span class="n">object</span> <span class="o">=</span> <span class="p">[</span><span class="bp">NSJSONSerialization</span> <span class="nl">JSONObjectWithData</span><span class="p">:[</span><span class="nb">self</span> <span class="nl">dataUsingEncoding</span><span class="p">:</span><span class="n">NSUTF8StringEncoding</span><span class="p">]</span> <span class="nl">options</span><span class="p">:</span><span class="n">NSJSONReadingAllowFragments</span> <span class="nl">error</span><span class="p">:</span><span class="o">&amp;</span><span class="n">error</span><span class="p">];</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">error</span> <span class="o">!=</span> <span class="nb">nil</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;NSString JSONObject error: %@&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">error</span> <span class="n">localizedDescription</span><span class="p">]);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">object</span> <span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">@end</span></code></pre></div>
+
+
+<p>3.我们来看看具体的json解析实现
+如果想要将OC对象转换成json格式 我们可以用dataWithJSONObject
+如果想要将json格式的字符串转换成OC对象,我们可以用JSONObjectWithData,里面的options是一个枚举</p>
+
+<div class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="k">typedef</span> <span class="nf">NS_OPTIONS</span><span class="p">(</span><span class="bp">NSUInteger</span><span class="p">,</span> <span class="n">NSJSONReadingOptions</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">NSJSONReadingMutableContainers</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1UL</span> <span class="o">&lt;&lt;</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">NSJSONReadingMutableLeaves</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1UL</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="n">NSJSONReadingAllowFragments</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1UL</span> <span class="o">&lt;&lt;</span> <span class="mi">2</span><span class="p">)</span>
+<span class="p">}</span> <span class="n">NS_ENUM_AVAILABLE</span><span class="p">(</span><span class="mi">10</span><span class="n">_7</span><span class="p">,</span> <span class="mi">5</span><span class="n">_0</span><span class="p">);</span>
+
+<span class="k">typedef</span> <span class="nf">NS_OPTIONS</span><span class="p">(</span><span class="bp">NSUInteger</span><span class="p">,</span> <span class="n">NSJSONWritingOptions</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">NSJSONWritingPrettyPrinted</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1UL</span> <span class="o">&lt;&lt;</span> <span class="mi">0</span><span class="p">)</span>
+<span class="p">}</span> <span class="n">NS_ENUM_AVAILABLE</span><span class="p">(</span><span class="mi">10</span><span class="n">_7</span><span class="p">,</span> <span class="mi">5</span><span class="n">_0</span><span class="p">);</span></code></pre></div>
+
+
+<ul>
+<li>NSJSONReadingMutableContainers意思是返回可变的NSArray和NSDoctionary</li>
+<li>NSJSONReadingMutableLeaves返回可变的NSString</li>
+<li>NSJSONReadingAllowFragments 意思是需要格式化的json字符串最外层可以不是数组和字典，只要是正确的json格式就行。</li>
+</ul>
+
+
 		
 		
 	</div>
