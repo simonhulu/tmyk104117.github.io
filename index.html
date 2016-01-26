@@ -7,7 +7,11 @@
 	<meta name="author" content="张诗杰">
 
 	
-	<meta name="description" content=" Jan 26th, 2016 Comments ">
+	<meta name="description" content="#ifdef DEBUG
+#define DLog(fmt, ...) NSLog((@&quot;%s [Line %d] &quot; fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
+#else
+#define DLog(...)
+# &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -87,6 +91,20 @@
 	</h2>
 	<div class="entry-content">
 		
+
+<div class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="cp">#ifdef DEBUG</span>
+<span class="cp">#define DLog(fmt, ...) NSLog((@&quot;%s [Line %d] &quot; fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)</span>
+<span class="cp">#else</span>
+<span class="cp">#define DLog(...)</span>
+<span class="cp">#endif</span>
+<span class="cp">#define ALog(fmt, ...) NSLog((@&quot;%s [Line %d] &quot; fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)</span></code></pre></div>
+
+
+<p>主要是学习这个gcc相关的宏
+* <strong>PRETTY_FUNCTION</strong>会打印出所在函数的相关信息
+* <strong>LINE</strong>会打印出行数
+* <strong>VA_ARGS</strong>代表着可变参数,这是C语言里面的宏,前面加上##,代表着这个可变参数可以为空，如果你不使用##，而传入了一个空的可变参数，这个时候编译器就会报错,因为有一个逗号没有去掉,但是加了##之后
+如果没有可变参数,预编译器会去掉前面的那个逗号</p>
 
 		
 		
