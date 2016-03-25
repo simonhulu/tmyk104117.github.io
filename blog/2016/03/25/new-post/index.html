@@ -3,15 +3,11 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Cordova学习之CDVDebug.h文件 - My Developer Path</title>
+	<title>好长时间没写博客了 - My Developer Path</title>
 	<meta name="author" content="张诗杰">
 
 	
-	<meta name="description" content="#ifdef DEBUG
-#define DLog(fmt, ...) NSLog((@&quot;%s [Line %d] &quot; fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
-#else
-#define DLog(...)
-# &hellip;">
+	<meta name="description" content="总是三分钟热度,这个很困扰我 Mar 25th, 2016 Comments ">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -80,22 +76,8 @@
 		
 	
 	<div id="content" class="inner"><article class="post">
-	<h2 class="title">Cordova学习之CDVDebug.h文件</h2>
-	<div class="entry-content">
-
-<div class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="cp">#ifdef DEBUG</span>
-<span class="cp">#define DLog(fmt, ...) NSLog((@&quot;%s [Line %d] &quot; fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)</span>
-<span class="cp">#else</span>
-<span class="cp">#define DLog(...)</span>
-<span class="cp">#endif</span>
-<span class="cp">#define ALog(fmt, ...) NSLog((@&quot;%s [Line %d] &quot; fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)</span></code></pre></div>
-
-
-<p>主要是学习这个gcc相关的宏
-1. <strong>PRETTY_FUNCTION</strong>会打印出所在函数的相关信息
-2. <strong>LINE</strong>会打印出行数
-3. <strong>VA_ARGS</strong>代表着可变参数,这是C语言里面的宏,前面加上##,代表着这个可变参数可以为空，如果你不使用##，而传入了一个空的可变参数，这个时候编译器就会报错,因为有一个逗号没有去掉,但是加了##之后
-如果没有可变参数,预编译器会去掉前面的那个逗号</p>
+	<h2 class="title">好长时间没写博客了</h2>
+	<div class="entry-content"><p>总是三分钟热度,这个很困扰我</p>
 </div>
 
 
@@ -105,7 +87,7 @@
 
 
 
-Jan 26th, 2016</div>
+Mar 25th, 2016</div>
 	<div class="tags">
 
 </div>
@@ -154,8 +136,8 @@ Jan 26th, 2016</div>
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://tmyk104117.github.io/blog/2016/01/26/newtitle/';
-        var disqus_url = 'http://tmyk104117.github.io/blog/2016/01/26/newtitle/';
+        var disqus_identifier = 'http://tmyk104117.github.io/blog/2016/03/25/new-post/';
+        var disqus_url = 'http://tmyk104117.github.io/blog/2016/03/25/new-post/';
         var disqus_script = 'embed.js';
       
     (function () {
