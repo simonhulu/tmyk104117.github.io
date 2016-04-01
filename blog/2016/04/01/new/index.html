@@ -7,7 +7,7 @@
 	<meta name="author" content="张诗杰">
 
 	
-	<meta name="description" content="模块 在ES5里,使用CommmonJS标准,引入React包基本通过require进行 //ES5 var React = require(&ldquo;react-native&rdquo;); var { Image, Text, PropTypes }=React;// &hellip;">
+	<meta name="description" content="模块 在ES5里,使用CommmonJS标准,引入React包基本通过require进行 //ES5 var React = require(&quot;react-native&quot;); var { Image, Text, PropTypes }=React;// &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -79,21 +79,23 @@
 	<h2 class="title">React Native Es5 Es6对照表</h2>
 	<div class="entry-content"><h1>模块</h1>
 
-<p> 在ES5里,使用CommmonJS标准,引入React包基本通过require进行
- //ES5
- var React = require(&ldquo;react-native&rdquo;);
- var {
-    Image,
-    Text,
-    PropTypes
- }=React;//引用不同的ReactNative组件</p>
+<p> 在ES5里,使用CommmonJS标准,引入React包基本通过require进行</p>
 
-<p> //ES6
- import React,{
-    Image,
-    Text,
-    PropTypes
- }from &lsquo;react-native&rsquo;;</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">//ES5</span>
+ <span class="kd">var</span> <span class="nx">React</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;react-native&quot;</span><span class="p">);</span>
+ <span class="kd">var</span> <span class="p">{</span>
+    <span class="nx">Image</span><span class="p">,</span>
+    <span class="nx">Text</span><span class="p">,</span>
+    <span class="nx">PropTypes</span>
+ <span class="p">}</span><span class="o">=</span><span class="nx">React</span><span class="p">;</span><span class="c1">//引用不同的ReactNative组件</span>
+
+ <span class="c1">//ES6</span>
+ <span class="kr">import</span> <span class="nx">React</span><span class="p">,{</span>
+    <span class="nx">Image</span><span class="p">,</span>
+    <span class="nx">Text</span><span class="p">,</span>
+    <span class="nx">PropTypes</span>
+ <span class="p">}</span><span class="nx">from</span> <span class="s1">&#39;react-native&#39;</span><span class="p">;</span></code></pre></div>
+
 
 <h1>导出单个类</h1>
 

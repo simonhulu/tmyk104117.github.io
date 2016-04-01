@@ -4,7 +4,7 @@
   <title><![CDATA[My Developer Path]]></title>
   <link href="http://tmyk104117.github.io/atom.xml" rel="self"/>
   <link href="http://tmyk104117.github.io/"/>
-  <updated>2016-04-01T18:14:52+08:00</updated>
+  <updated>2016-04-01T18:20:02+08:00</updated>
   <id>http://tmyk104117.github.io/</id>
   <author>
     <name><![CDATA[张诗杰]]></name>
@@ -20,21 +20,23 @@
     <id>http://tmyk104117.github.io/blog/2016/04/01/new</id>
     <content type="html"><![CDATA[<h1>模块</h1>
 
-<p> 在ES5里,使用CommmonJS标准,引入React包基本通过require进行
- //ES5
- var React = require(&ldquo;react-native&rdquo;);
- var {
-    Image,
-    Text,
-    PropTypes
- }=React;//引用不同的ReactNative组件</p>
+<p> 在ES5里,使用CommmonJS标准,引入React包基本通过require进行</p>
 
-<p> //ES6
- import React,{
-    Image,
-    Text,
-    PropTypes
- }from &lsquo;react-native&rsquo;;</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">//ES5</span>
+ <span class="kd">var</span> <span class="nx">React</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;react-native&quot;</span><span class="p">);</span>
+ <span class="kd">var</span> <span class="p">{</span>
+    <span class="nx">Image</span><span class="p">,</span>
+    <span class="nx">Text</span><span class="p">,</span>
+    <span class="nx">PropTypes</span>
+ <span class="p">}</span><span class="o">=</span><span class="nx">React</span><span class="p">;</span><span class="c1">//引用不同的ReactNative组件</span>
+
+ <span class="c1">//ES6</span>
+ <span class="kr">import</span> <span class="nx">React</span><span class="p">,{</span>
+    <span class="nx">Image</span><span class="p">,</span>
+    <span class="nx">Text</span><span class="p">,</span>
+    <span class="nx">PropTypes</span>
+ <span class="p">}</span><span class="nx">from</span> <span class="s1">&#39;react-native&#39;</span><span class="p">;</span></code></pre></div>
+
 
 <h1>导出单个类</h1>
 
