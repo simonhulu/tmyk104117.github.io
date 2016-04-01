@@ -4,7 +4,7 @@
   <title><![CDATA[My Developer Path]]></title>
   <link href="http://tmyk104117.github.io/atom.xml" rel="self"/>
   <link href="http://tmyk104117.github.io/"/>
-  <updated>2016-04-01T18:20:02+08:00</updated>
+  <updated>2016-04-02T01:48:31+08:00</updated>
   <id>http://tmyk104117.github.io/</id>
   <author>
     <name><![CDATA[张诗杰]]></name>
@@ -40,144 +40,166 @@
 
 <h1>导出单个类</h1>
 
-<p>在ES5里,要导出一个类给别的模块用,一般通过module.exports来导出
-//ES5
-var MyComponent = React.createClass({
-    &hellip;
-});
-module.exports = MyComponent;</p>
+<p>在ES5里,要导出一个类给别的模块用,一般通过module.exports来导出</p>
 
-<p>在ES6里,通常用export default来实现相同的功能
-//ES6
-export default class MyComponent extends React.Component{
-    &hellip;
-}
-引用的时候也类似
-//ES5
-var MyComponent = require(&lsquo;./MyComponent.js&rsquo;)
-//ES6
-import MyComponent from &lsquo;./MyComponent.js&rsquo;</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">//ES5</span>
+<span class="kd">var</span> <span class="nx">MyComponent</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createClass</span><span class="p">({</span>
+    <span class="p">...</span>
+<span class="p">});</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">MyComponent</span><span class="p">;</span></code></pre></div>
+
+
+<p>在ES6里,通常用export default来实现相同的功能</p>
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">//ES6</span>
+<span class="kr">export</span> <span class="k">default</span> <span class="kr">class</span> <span class="nx">MyComponent</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span><span class="p">{</span>
+    <span class="p">...</span>
+<span class="p">}</span></code></pre></div>
+
+
+<p>引用的时候也类似</p>
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">//ES5</span>
+<span class="kd">var</span> <span class="nx">MyComponent</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./MyComponent.js&#39;</span><span class="p">)</span>
+<span class="c1">//ES6</span>
+<span class="kr">import</span> <span class="nx">MyComponent</span> <span class="nx">from</span> <span class="s1">&#39;./MyComponent.js&#39;</span></code></pre></div>
+
 
 <h1>定义组件</h1>
 
-<p>在ES5里,通常通过React.createClass来定义一个组件类
-//ES5
-var Photo = React.createClass({
-    render:function(){
-        return (
-            <Image source={this.props.source}/>
-            );
-    },
-});
-在ES6里,我们通过定义一个继承自React.Component的class来定义一个组件类,
-//ES6
-class Photo extends React.Component{
-    render(){
-        return(
-            <Image source={this.props.source}/>
-        );
-    }
-}</p>
+<p>在ES5里,通常通过React.createClass来定义一个组件类</p>
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">//ES5</span>
+<span class="kd">var</span> <span class="nx">Photo</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createClass</span><span class="p">({</span>
+    <span class="nx">render</span><span class="o">:</span><span class="kd">function</span><span class="p">(){</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="o">&lt;</span><span class="nx">Image</span> <span class="nx">source</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">source</span><span class="p">}</span><span class="o">/&gt;</span>
+            <span class="p">);</span>
+    <span class="p">},</span>
+<span class="p">});</span></code></pre></div>
+
+
+<p>在ES6里,我们通过定义一个继承自React.Component的class来定义一个组件类,
+//ES6</p>
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kr">class</span> <span class="nx">Photo</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span><span class="p">{</span>
+    <span class="nx">render</span><span class="p">(){</span>
+        <span class="k">return</span><span class="p">(</span>
+            <span class="o">&lt;</span><span class="nx">Image</span> <span class="nx">source</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">source</span><span class="p">}</span><span class="o">/&gt;</span>
+        <span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+
 
 <h1>给组件定义方法 #</h1>
 
-<p>从上面的例子可以看到,给组件定义方法不再用 <font color='red'>名字:function()</font>的写法,而是直接用 <font color="red">名字()</font>,在方法的后面也不能有逗号了
-//ES5
-var Photo = React.createClass({
-    componentWillMount:function(){</p>
+<p>从上面的例子可以看到,给组件定义方法不再用 <font color='red'>名字:function()</font>的写法,而是直接用 <font color="red">名字()</font>,在方法的后面也不能有逗号了</p>
 
-<pre><code>},
-render:function(){
-    return (
-        &lt;Image source={this.props.source}/&gt;
-        );
-},
-</code></pre>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">//ES5</span>
+<span class="kd">var</span> <span class="nx">Photo</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createClass</span><span class="p">({</span>
+    <span class="nx">componentWillMount</span><span class="o">:</span><span class="kd">function</span><span class="p">(){</span>
 
-<p>});</p>
+    <span class="p">},</span>
+    <span class="nx">render</span><span class="o">:</span><span class="kd">function</span><span class="p">(){</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="o">&lt;</span><span class="nx">Image</span> <span class="nx">source</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">source</span><span class="p">}</span><span class="o">/&gt;</span>
+            <span class="p">);</span>
+    <span class="p">},</span>
+<span class="p">});</span>
 
-<p>//ES6
-class Photo extends React.Component{
-    componentWillMount(){</p>
+<span class="c1">//ES6</span>
+<span class="kr">class</span> <span class="nx">Photo</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span><span class="p">{</span>
+    <span class="nx">componentWillMount</span><span class="p">(){</span>
 
-<pre><code>}
-render(){
-    return &lt;Image source={this.props.source}/&gt;
-}
-</code></pre>
+    <span class="p">}</span>
+    <span class="nx">render</span><span class="p">(){</span>
+        <span class="k">return</span> <span class="o">&lt;</span><span class="nx">Image</span> <span class="nx">source</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">source</span><span class="p">}</span><span class="o">/&gt;</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></div>
 
-<p>}</p>
 
 <h1>定义组件的属性类型和默认属性</h1>
 
-<p>在ES5里，属性类型和默认属性分别通过propTypes成员和getDefaulltProps方法来实现
-//
-var Video = React.createClass({
-    getDefaultProps:function(){
-        return {autoPlay:false,
-                maxLoops:10,}
-    },
-    propTypes:{
-        autoPlay:React.PropTypes.bool.isRequired,
-        maxLoops:React.PropTypes.number.isRequired,
-        posterFrameSrc:React.PropTypes.string.isRequired,
-        videoSrc:React.PropTypes.string.isRequired
-    },
-    render:function(){
-        return(
-        <View />
-        );
-    },
-})</p>
+<p>在ES5里，属性类型和默认属性分别通过propTypes成员和getDefaulltProps方法来实现</p>
 
-<p>在ES6里,可以统一使用static成员来实现
-//ES6
-class Video extends React.Component{
-    static defaultProps = {
-        autoPlay:false,
-        maxLoops:10,
-    };
-    static propTypes ={
-        autoPlay:React.PropTypes.bool.isRequired,
-        maxLoops:React.PropTypes.number.isRequired,
-        posterFrameSrc:React.PropTypes.string.isRequired,
-        videoSrc:React.PropTypes.string.isRequired,
-    };
-    render(){
-        return(
-            <View />
-        );
-    }
-}
-}</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">//</span>
+<span class="kd">var</span> <span class="nx">Video</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createClass</span><span class="p">({</span>
+    <span class="nx">getDefaultProps</span><span class="o">:</span><span class="kd">function</span><span class="p">(){</span>
+        <span class="k">return</span> <span class="p">{</span><span class="nx">autoPlay</span><span class="o">:</span><span class="kc">false</span><span class="p">,</span>
+                <span class="nx">maxLoops</span><span class="o">:</span><span class="mi">10</span><span class="p">,}</span>
+    <span class="p">},</span>
+    <span class="nx">propTypes</span><span class="o">:</span><span class="p">{</span>
+        <span class="nx">autoPlay</span><span class="o">:</span><span class="nx">React</span><span class="p">.</span><span class="nx">PropTypes</span><span class="p">.</span><span class="nx">bool</span><span class="p">.</span><span class="nx">isRequired</span><span class="p">,</span>
+        <span class="nx">maxLoops</span><span class="o">:</span><span class="nx">React</span><span class="p">.</span><span class="nx">PropTypes</span><span class="p">.</span><span class="nx">number</span><span class="p">.</span><span class="nx">isRequired</span><span class="p">,</span>
+        <span class="nx">posterFrameSrc</span><span class="o">:</span><span class="nx">React</span><span class="p">.</span><span class="nx">PropTypes</span><span class="p">.</span><span class="nx">string</span><span class="p">.</span><span class="nx">isRequired</span><span class="p">,</span>
+        <span class="nx">videoSrc</span><span class="o">:</span><span class="nx">React</span><span class="p">.</span><span class="nx">PropTypes</span><span class="p">.</span><span class="nx">string</span><span class="p">.</span><span class="nx">isRequired</span>
+    <span class="p">},</span>
+    <span class="nx">render</span><span class="o">:</span><span class="kd">function</span><span class="p">(){</span>
+        <span class="k">return</span><span class="p">(</span>
+        <span class="o">&lt;</span><span class="nx">View</span> <span class="o">/&gt;</span>
+        <span class="p">);</span>
+    <span class="p">},</span>
+<span class="p">})</span></code></pre></div>
 
-<p>初始化STATE
-//ES5
-var Video = React.createClass({
-    getInitialState:function(){
-        return{
-            loopRemaining:this.props.maxLoops,
-        };
-    },
-})</p>
 
-<p>ES6下有两种写法
-class Video extends React.Component{
-    state = {
-        loopsRemaining:this.props.maxLoops,
-    }
-}</p>
+<p>在ES6里,可以统一使用static成员来实现</p>
 
-<p>不过我们推荐更易理解的在构造函数中初始化(这样你还可以根据需要做一些计算)
-//ES6
-class Video extends React.Component{
-    constructor(props){
-        super(props);
-        this.state = {
-            loopsRemaining:this.props.maxLoops,
-        };
-    }
-}</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">//ES6</span>
+<span class="kr">class</span> <span class="nx">Video</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span><span class="p">{</span>
+    <span class="kr">static</span> <span class="nx">defaultProps</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="nx">autoPlay</span><span class="o">:</span><span class="kc">false</span><span class="p">,</span>
+        <span class="nx">maxLoops</span><span class="o">:</span><span class="mi">10</span><span class="p">,</span>
+    <span class="p">};</span>
+    <span class="kr">static</span> <span class="nx">propTypes</span> <span class="o">=</span><span class="p">{</span>
+        <span class="nx">autoPlay</span><span class="o">:</span><span class="nx">React</span><span class="p">.</span><span class="nx">PropTypes</span><span class="p">.</span><span class="nx">bool</span><span class="p">.</span><span class="nx">isRequired</span><span class="p">,</span>
+        <span class="nx">maxLoops</span><span class="o">:</span><span class="nx">React</span><span class="p">.</span><span class="nx">PropTypes</span><span class="p">.</span><span class="nx">number</span><span class="p">.</span><span class="nx">isRequired</span><span class="p">,</span>
+        <span class="nx">posterFrameSrc</span><span class="o">:</span><span class="nx">React</span><span class="p">.</span><span class="nx">PropTypes</span><span class="p">.</span><span class="nx">string</span><span class="p">.</span><span class="nx">isRequired</span><span class="p">,</span>
+        <span class="nx">videoSrc</span><span class="o">:</span><span class="nx">React</span><span class="p">.</span><span class="nx">PropTypes</span><span class="p">.</span><span class="nx">string</span><span class="p">.</span><span class="nx">isRequired</span><span class="p">,</span>
+    <span class="p">};</span>
+    <span class="nx">render</span><span class="p">(){</span>
+        <span class="k">return</span><span class="p">(</span>
+            <span class="o">&lt;</span><span class="nx">View</span> <span class="o">/&gt;</span>
+        <span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+
+
+<p>初始化STATE</p>
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">//ES5</span>
+<span class="kd">var</span> <span class="nx">Video</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createClass</span><span class="p">({</span>
+    <span class="nx">getInitialState</span><span class="o">:</span><span class="kd">function</span><span class="p">(){</span>
+        <span class="k">return</span><span class="p">{</span>
+            <span class="nx">loopRemaining</span><span class="o">:</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">maxLoops</span><span class="p">,</span>
+        <span class="p">};</span>
+    <span class="p">},</span>
+<span class="p">})</span></code></pre></div>
+
+
+<p>ES6下有两种写法</p>
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kr">class</span> <span class="nx">Video</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span><span class="p">{</span>
+    <span class="nx">state</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="nx">loopsRemaining</span><span class="o">:</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">maxLoops</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+
+
+<p>不过我们推荐更易理解的在构造函数中初始化(这样你还可以根据需要做一些计算)</p>
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">//ES6</span>
+<span class="kr">class</span> <span class="nx">Video</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span><span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">props</span><span class="p">){</span>
+        <span class="kr">super</span><span class="p">(</span><span class="nx">props</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="nx">loopsRemaining</span><span class="o">:</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">maxLoops</span><span class="p">,</span>
+        <span class="p">};</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+
+
+
 ]]></content>
   </entry>
   
