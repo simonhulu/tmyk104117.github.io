@@ -4,7 +4,7 @@
   <title><![CDATA[My Developer Path]]></title>
   <link href="http://tmyk104117.github.io/atom.xml" rel="self"/>
   <link href="http://tmyk104117.github.io/"/>
-  <updated>2016-04-01T16:57:48+08:00</updated>
+  <updated>2016-04-01T17:01:15+08:00</updated>
   <id>http://tmyk104117.github.io/</id>
   <author>
     <name><![CDATA[张诗杰]]></name>
@@ -18,8 +18,9 @@
     <link href="http://tmyk104117.github.io/blog/2016/04/01/new/"/>
     <updated>2016-04-01T16:53:26+08:00</updated>
     <id>http://tmyk104117.github.io/blog/2016/04/01/new</id>
-    <content type="html"><![CDATA[<p><em>模块</em>
- 在ES5里,使用CommmonJS标准,引入React包基本通过require进行
+    <content type="html"><![CDATA[<h1>模块</h1>
+
+<p> 在ES5里,使用CommmonJS标准,引入React包基本通过require进行
  //ES5
  var React = require(&ldquo;react-native&rdquo;);
  var {
