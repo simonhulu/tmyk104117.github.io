@@ -4,7 +4,7 @@
   <title><![CDATA[My Developer Path]]></title>
   <link href="http://tmyk104117.github.io/atom.xml" rel="self"/>
   <link href="http://tmyk104117.github.io/"/>
-  <updated>2016-04-01T17:01:15+08:00</updated>
+  <updated>2016-04-01T18:14:52+08:00</updated>
   <id>http://tmyk104117.github.io/</id>
   <author>
     <name><![CDATA[张诗杰]]></name>
@@ -28,6 +28,154 @@
     Text,
     PropTypes
  }=React;//引用不同的ReactNative组件</p>
+
+<p> //ES6
+ import React,{
+    Image,
+    Text,
+    PropTypes
+ }from &lsquo;react-native&rsquo;;</p>
+
+<h1>导出单个类</h1>
+
+<p>在ES5里,要导出一个类给别的模块用,一般通过module.exports来导出
+//ES5
+var MyComponent = React.createClass({
+    &hellip;
+});
+module.exports = MyComponent;</p>
+
+<p>在ES6里,通常用export default来实现相同的功能
+//ES6
+export default class MyComponent extends React.Component{
+    &hellip;
+}
+引用的时候也类似
+//ES5
+var MyComponent = require(&lsquo;./MyComponent.js&rsquo;)
+//ES6
+import MyComponent from &lsquo;./MyComponent.js&rsquo;</p>
+
+<h1>定义组件</h1>
+
+<p>在ES5里,通常通过React.createClass来定义一个组件类
+//ES5
+var Photo = React.createClass({
+    render:function(){
+        return (
+            <Image source={this.props.source}/>
+            );
+    },
+});
+在ES6里,我们通过定义一个继承自React.Component的class来定义一个组件类,
+//ES6
+class Photo extends React.Component{
+    render(){
+        return(
+            <Image source={this.props.source}/>
+        );
+    }
+}</p>
+
+<h1>给组件定义方法 #</h1>
+
+<p>从上面的例子可以看到,给组件定义方法不再用 <font color='red'>名字:function()</font>的写法,而是直接用 <font color="red">名字()</font>,在方法的后面也不能有逗号了
+//ES5
+var Photo = React.createClass({
+    componentWillMount:function(){</p>
+
+<pre><code>},
+render:function(){
+    return (
+        &lt;Image source={this.props.source}/&gt;
+        );
+},
+</code></pre>
+
+<p>});</p>
+
+<p>//ES6
+class Photo extends React.Component{
+    componentWillMount(){</p>
+
+<pre><code>}
+render(){
+    return &lt;Image source={this.props.source}/&gt;
+}
+</code></pre>
+
+<p>}</p>
+
+<h1>定义组件的属性类型和默认属性</h1>
+
+<p>在ES5里，属性类型和默认属性分别通过propTypes成员和getDefaulltProps方法来实现
+//
+var Video = React.createClass({
+    getDefaultProps:function(){
+        return {autoPlay:false,
+                maxLoops:10,}
+    },
+    propTypes:{
+        autoPlay:React.PropTypes.bool.isRequired,
+        maxLoops:React.PropTypes.number.isRequired,
+        posterFrameSrc:React.PropTypes.string.isRequired,
+        videoSrc:React.PropTypes.string.isRequired
+    },
+    render:function(){
+        return(
+        <View />
+        );
+    },
+})</p>
+
+<p>在ES6里,可以统一使用static成员来实现
+//ES6
+class Video extends React.Component{
+    static defaultProps = {
+        autoPlay:false,
+        maxLoops:10,
+    };
+    static propTypes ={
+        autoPlay:React.PropTypes.bool.isRequired,
+        maxLoops:React.PropTypes.number.isRequired,
+        posterFrameSrc:React.PropTypes.string.isRequired,
+        videoSrc:React.PropTypes.string.isRequired,
+    };
+    render(){
+        return(
+            <View />
+        );
+    }
+}
+}</p>
+
+<p>初始化STATE
+//ES5
+var Video = React.createClass({
+    getInitialState:function(){
+        return{
+            loopRemaining:this.props.maxLoops,
+        };
+    },
+})</p>
+
+<p>ES6下有两种写法
+class Video extends React.Component{
+    state = {
+        loopsRemaining:this.props.maxLoops,
+    }
+}</p>
+
+<p>不过我们推荐更易理解的在构造函数中初始化(这样你还可以根据需要做一些计算)
+//ES6
+class Video extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            loopsRemaining:this.props.maxLoops,
+        };
+    }
+}</p>
 ]]></content>
   </entry>
   
