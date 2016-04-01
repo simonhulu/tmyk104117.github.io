@@ -4,7 +4,7 @@
   <title><![CDATA[My Developer Path]]></title>
   <link href="http://tmyk104117.github.io/atom.xml" rel="self"/>
   <link href="http://tmyk104117.github.io/"/>
-  <updated>2016-03-25T19:15:47+08:00</updated>
+  <updated>2016-04-01T16:56:27+08:00</updated>
   <id>http://tmyk104117.github.io/</id>
   <author>
     <name><![CDATA[张诗杰]]></name>
@@ -12,6 +12,23 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[React Native es5 es6对照表]]></title>
+    <link href="http://tmyk104117.github.io/blog/2016/04/01/new/"/>
+    <updated>2016-04-01T16:53:26+08:00</updated>
+    <id>http://tmyk104117.github.io/blog/2016/04/01/new</id>
+    <content type="html"><![CDATA[<p>*模块
+ 在ES5里,使用CommmonJS标准,引入React包基本通过require进行
+ //ES5
+ var React = require(&ldquo;react-native&rdquo;);
+ var {
+    Image,
+    Text,
+    PropTypes
+ }=React;//引用不同的ReactNative组件</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[好长时间没写博客了]]></title>
