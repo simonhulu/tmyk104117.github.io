@@ -4,7 +4,7 @@
   <title><![CDATA[My Developer Path]]></title>
   <link href="http://tmyk104117.github.io/atom.xml" rel="self"/>
   <link href="http://tmyk104117.github.io/"/>
-  <updated>2016-04-03T15:02:37+08:00</updated>
+  <updated>2016-04-03T15:07:35+08:00</updated>
   <id>http://tmyk104117.github.io/</id>
   <author>
     <name><![CDATA[张诗杰]]></name>
@@ -12,6 +12,15 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[树莓派安装教程]]></title>
+    <link href="http://tmyk104117.github.io/blog/2016/04/03/raspberry1/"/>
+    <updated>2016-04-03T15:04:35+08:00</updated>
+    <id>http://tmyk104117.github.io/blog/2016/04/03/raspberry1</id>
+    <content type="html"><![CDATA[<p>1 安装</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[new]]></title>
