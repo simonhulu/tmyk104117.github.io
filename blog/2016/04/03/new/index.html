@@ -1,0 +1,260 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>new - My Developer Path</title>
+	<meta name="author" content="张诗杰">
+
+	
+	<meta name="description" content="把方法作为回调提供 很多习惯于ES6的用户反而不理解在ES5下可以这么做 //ES6
+var PostInfo = React.createClass({ handleOptionsButtonClick:function(e){ //Here this.setState({ &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="My Developer Path" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	 <link href="/stylesheets/pygments.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+</head>
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">My Developer Path</a></h1>
+<nav id="main-nav"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="https://www.baidu.com" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:tmyk104117.github.io">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		
+    
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+    
+	</div>
+	<form class="search" action="https://www.baidu.com" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:tmyk104117.github.io">
+	</form>
+</nav>
+
+
+	</header>
+	
+		
+	
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">New</h2>
+	<div class="entry-content"><h1>把方法作为回调提供</h1>
+
+<p>很多习惯于ES6的用户反而不理解在ES5下可以这么做</p>
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">//ES6</span>
+<span class="kd">var</span> <span class="nx">PostInfo</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createClass</span><span class="p">({</span>
+    <span class="nx">handleOptionsButtonClick</span><span class="o">:</span><span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span>
+        <span class="c1">//Here</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span><span class="nx">showOptionsModal</span><span class="o">:</span><span class="kc">true</span><span class="p">});</span>
+    <span class="p">},</span>
+    <span class="nx">render</span><span class="o">:</span><span class="kd">function</span><span class="p">(){</span>
+        <span class="k">return</span><span class="p">(</span>
+            <span class="o">&lt;</span><span class="nx">TouchableHighlight</span> <span class="nx">onPress</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">handleOptionsButtonClick</span><span class="p">}</span><span class="o">&gt;</span>
+                <span class="o">&lt;</span><span class="nx">Text</span><span class="o">&gt;</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">label</span><span class="p">}</span><span class="o">&lt;</span><span class="err">/Text&gt;</span>
+            <span class="o">&lt;</span><span class="err">/TouchableHighlight&gt;</span>
+        <span class="p">)</span>
+    <span class="p">},</span>
+<span class="p">});</span></code></pre></div>
+
+
+<p>在ES5下,React.createClass会把所有的方法都bind一遍,这样可以提交到任意的地方作为回调函数,而this不会变化。但官方现在逐步认为这反而是不标准,不易理解的。
+在ES6下,你需要通过bind来绑定this引用,或者使用箭头函数(它会绑定当前scope的this引用)来调用</p>
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">//ES6</span>
+<span class="kr">class</span> <span class="nx">PostInfo</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span>
+<span class="p">{</span>
+    <span class="nx">handleOptionsButtonClick</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span><span class="nx">showOptionsModal</span><span class="o">:</span><span class="kc">true</span><span class="p">});</span>
+    <span class="p">}</span>
+    <span class="nx">render</span><span class="p">(){</span>
+        <span class="k">return</span><span class="p">(</span>
+            <span class="o">&lt;</span><span class="nx">TouchableHight</span> <span class="nx">onPress</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">handleOptionsButtonClick</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">)}</span>
+                            <span class="nx">onPress</span><span class="o">=</span><span class="p">{</span><span class="nx">e</span><span class="o">=&gt;</span><span class="k">this</span><span class="p">.</span><span class="nx">handleOptionsButtonClick</span><span class="p">(</span><span class="nx">e</span><span class="p">)}</span><span class="o">&gt;</span>
+                <span class="o">&lt;</span><span class="nx">Text</span><span class="o">&gt;</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">label</span><span class="p">}</span><span class="o">&lt;</span><span class="err">/Text&gt;</span>
+            <span class="o">&lt;</span><span class="err">/TouchableHight&gt;</span>
+        <span class="p">)</span>
+    <span class="p">},</span>
+<span class="p">}</span></code></pre></div>
+
+
+<p><font color="red">箭头函数</font>实际上是在这里定义了一个临时的函数,箭头函数的箭头<font color="red">&ldquo;=>&rdquo;</font>之前是一个空括号,单个的参数名,或用括号括起的多个参数名,而箭头之后可以是一个表达式(作为函数的返回值),或者是用花括号括起的函数体(需要自行通过return来返回值,否则返回的时undefined).</p>
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">//箭头函数的例子</span>
+<span class="p">()</span><span class="o">=&gt;</span><span class="mi">1</span>
+<span class="nx">v</span><span class="o">=&gt;</span><span class="nx">v</span><span class="o">+</span><span class="mi">1</span>
+<span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">)</span><span class="o">=&gt;</span><span class="nx">a</span><span class="o">+</span><span class="nx">b</span>
+<span class="p">()</span><span class="o">=&gt;</span><span class="p">{</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">&quot;foo&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="nx">e</span><span class="o">=&gt;</span><span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">e</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="mi">0</span> <span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">1000</span><span class="o">/</span><span class="nx">e</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
+
+<p>需要注意的是,不论是bind还是箭头函数,每次被执行都返回的是一个新的函数引用,因此如果你需要函数的引用去做一些别的事情(譬如卸载监听器),那你必须是保存这个引用</p>
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">//错误的做法</span>
+<span class="kr">class</span> <span class="nx">PauseMenu</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span><span class="p">{</span>
+    <span class="nx">compoentWillMount</span><span class="p">(){</span>
+        <span class="nx">AppStateIOS</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;change&#39;</span><span class="p">,</span><span class="k">this</span><span class="p">.</span><span class="nx">onAppPaused</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">));</span>
+    <span class="p">}</span>
+    <span class="nx">componentDidUnmount</span><span class="p">(){</span>
+        <span class="nx">AppStateIOS</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span><span class="s1">&#39;change&#39;</span><span class="p">,</span><span class="k">this</span><span class="p">.</span><span class="nx">onAppPaused</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">));</span>
+    <span class="p">}</span>
+    <span class="nx">onAppPaused</span><span class="p">(</span><span class="nx">event</span><span class="p">){</span>
+
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">//正确的做法</span>
+<span class="kr">class</span> <span class="nx">PauseMenu</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span><span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">props</span><span class="p">){</span>
+        <span class="kr">super</span><span class="p">(</span><span class="nx">props</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">_onAppPaused</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">onAppPaused</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="nx">componentWillMount</span><span class="p">(){</span>
+        <span class="nx">AppStateIOS</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;change&#39;</span><span class="p">,</span><span class="k">this</span><span class="p">.</span><span class="nx">_onAppPaused</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="nx">componentDidUnmount</span><span class="p">(){</span>
+        <span class="nx">AppStateIOS</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span><span class="s1">&#39;change&#39;</span><span class="p">,</span><span class="k">this</span><span class="p">.</span><span class="nx">_onAppPaused</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="nx">onAppPaused</span><span class="p">(</span><span class="nx">event</span><span class="p">){</span>
+
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">//或者</span>
+<span class="c1">// 正确的做法</span>
+<span class="kr">class</span> <span class="nx">PauseMenu</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span><span class="p">{</span>
+    <span class="nx">componentWillMount</span><span class="p">(){</span>
+        <span class="nx">AppStateIOS</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;change&#39;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">onAppPaused</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="nx">componentDidUnmount</span><span class="p">(){</span>
+        <span class="nx">AppStateIOS</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span><span class="s1">&#39;change&#39;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">onAppPaused</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="nx">onAppPaused</span> <span class="o">=</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="c1">//把方法直接作为一个arrow function的属性来定义，初始化的时候就绑定好了this指针</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+
+
+
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+Apr 3rd, 2016</div>
+	<div class="tags">
+
+</div>
+	
+	<div class="comments"><a href="#disqus_thread">Comments</a></div>
+	
+</div>
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+		
+		
+		<a class="addthis_button_tweet"></a>
+		
+		
+		
+	</div>
+	
+</div>
+
+
+
+<section id="comment">
+    <h2 class="title">Comments</h2>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+	<footer id="footer" class="inner">Copyright &copy; 2016
+
+    张诗杰
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'qizhangblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://tmyk104117.github.io/blog/2016/04/03/new/';
+        var disqus_url = 'http://tmyk104117.github.io/blog/2016/04/03/new/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//go.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+</body>
+</html>
