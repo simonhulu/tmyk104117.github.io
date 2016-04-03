@@ -4,7 +4,7 @@
   <title><![CDATA[My Developer Path]]></title>
   <link href="http://tmyk104117.github.io/atom.xml" rel="self"/>
   <link href="http://tmyk104117.github.io/"/>
-  <updated>2016-04-03T16:57:36+08:00</updated>
+  <updated>2016-04-03T16:58:32+08:00</updated>
   <id>http://tmyk104117.github.io/</id>
   <author>
     <name><![CDATA[张诗杰]]></name>
@@ -22,8 +22,9 @@
 <li>安装
 
 <ul>
-<li>1.1 <a href="https://www.raspberrypi.org/downloads/raspbian/">系统下载地址</a></li>
-<li>1.2 将SD卡插入读卡器,然后将读卡器插入mac,使用df查看当前已经挂载的卷<img src="http://7xs6cr.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-04-03%20%E4%B8%8B%E5%8D%883.17.02.png"></li>
+<li>1.1 首先下载系统的img文件<a href="https://www.raspberrypi.org/downloads/raspbian/">系统下载地址</a></li>
+<li>1.2 将SD卡插入读卡器,然后将读卡器插入mac,使用df查看当前已经挂载的卷 <br/>
+<img src="http://7xs6cr.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-04-03%20%E4%B8%8B%E5%8D%883.17.02.png"></li>
 </ul>
 </li>
 <li>配置无线wifi</li>
