@@ -121,9 +121,36 @@
  执行 sudo raspi-config 命令来扩充我们的filesystem<br/>
  <img src="http://7xs6cr.com1.z0.glb.clouddn.com/24_Mac%E4%B8%8B%E7%BB%99SD%E5%8D%A1%E5%AE%89%E8%A3%85%E6%A0%91%E8%8E%93%E6%B4%BERaspbian%E7%B3%BB%E7%BB%9F_%C2%B7_Issue__25_%C2%B7_c.png"><br/>
  选择第一项 Expand FIlesystem 扩展SD卡上可用的空间
- 完成后选择finish</li>
+ 完成后选择finish
+
+<ul>
+<li>输入命令 dmesg | grep usb 来查看我们插入的usb 无线网卡的生产商
+查看到<font color="red"> Manufacturer: Realtek</font>这样的,例子举得是realtek的例子,如果我们之前插入了网线,我们可以上网的情况下 使用
+<font color='red'>apt-cache search realtek</font>命令
+看到类似<font color="red">firmware-realtek - Binary firmware for Realtek wired and wireless network adapters</font>后 使用 apt-get install  firmware-realtek 安装</li>
+<li>如果树莓派不能上网, 可以去<a href="http://mirrors.aliyun.com/raspbian/raspbian/pool/non-free/f/firmware-nonfree">http://mirrors.aliyun.com/raspbian/raspbian/pool/non-free/f/firmware-nonfree</a> 找到对应的网卡驱动然后使用<br/>
+<font color="red">sudo dpkg -i /tmp/firmware-realtek_0.43_all.deb</font>命令来安装<br/>
+*修改配置文件
+使用<font color="red">vi /etc/network/interfaces</font>打开配置文件<br/>
+去掉 auto wlan0 下面的配置,不要删除 auto wlan1下面的
+然后加上<br/>
+auto wlan0
+iface wlan0 inet dhcp
+wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf<br/>
+然后修改/etc/wpa_supplicant/wpa_supplicant.conf<br/>
+加上如下配置<br/>
+network={
+  ssid=&ldquo;你的SSID(无线网的名字)&rdquo;
+  key_mgmt=WPA-PSK
+  psk=&ldquo;WIFI密码&rdquo;
+}<br/>
+key_mgmt 参数如果无线网络没有密码或者是wep加密用NONE，否则则用WPA-PSK</li>
+</ul>
+</li>
 </ol>
 
+
+<p><img src="http://7xs6cr.com1.z0.glb.clouddn.com/qrcode_for_gh_6f7e12337ad2_258.jpg"></p>
 
 		
 		
