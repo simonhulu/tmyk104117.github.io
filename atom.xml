@@ -4,7 +4,7 @@
   <title><![CDATA[My Developer Path]]></title>
   <link href="http://tmyk104117.github.io/atom.xml" rel="self"/>
   <link href="http://tmyk104117.github.io/"/>
-  <updated>2016-04-06T14:00:22+08:00</updated>
+  <updated>2016-04-06T14:07:20+08:00</updated>
   <id>http://tmyk104117.github.io/</id>
   <author>
     <name><![CDATA[张诗杰]]></name>
@@ -12,76 +12,6 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
-  
-  <entry>
-    <title type="html"><![CDATA[树莓派安装教程]]></title>
-    <link href="http://tmyk104117.github.io/blog/2016/04/03/raspberry1/"/>
-    <updated>2016-04-03T15:04:35+08:00</updated>
-    <id>http://tmyk104117.github.io/blog/2016/04/03/raspberry1</id>
-    <content type="html"><![CDATA[<ol>
-<li>安装
-
-<ul>
-<li>1.1 首先下载系统的img文件<a href="https://www.raspberrypi.org/downloads/raspbian/">系统下载地址</a></li>
-<li>1.2 将SD卡插入读卡器,然后将读卡器插入mac,使用df查看当前已经挂载的卷 <br/>
-<img src="http://7xs6cr.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-04-03%20%E4%B8%8B%E5%8D%883.17.02.png"><br/>
-因为已经命名了SD卡为Pi,所以SD卡得分区对应的设备文件为:/dev/disk2s1<br/>
-使用diskutil unmount命令来卸载刚刚插入的usb盘符
-<img src="http://7xs6cr.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7_2016-04-03_%E4%B8%8B%E5%8D%885_00_43.png"><br/>
-如图就是sd卡的盘符<br/>
-diskutil list 确认一下设备, 如图我们使用的是16G的卡<br/>
-<img src="http://7xs6cr.com1.z0.glb.clouddn.com/1064B971-F54A-4D82-8569-B6AB3138EEBD.png">
-我们使用dd命令来将下载到的img文件写到sdk里面去<br/>
-<img src="http://7xs6cr.com1.z0.glb.clouddn.com/24_Mac%E4%B8%8B%E7%BB%99SD%E5%8D%A1%E5%AE%89%E8%A3%85%E6%A0%91%E8%8E%93%E6%B4%BERaspbian%E7%B3%BB%E7%BB%9F_%C2%B7_Issue__25_%C2%B7_ccforward_cc.png"><br/>
-如图 /dev/disk2s1是分区,/dev/disk2是块设备,/dev/rdisk2是原始字符设备
-至此, SD卡已经刷入raspbian系统了<br/>
-再用diskutil unmountDisk卸载设备<br/>
-<img src="http://7xs6cr.com1.z0.glb.clouddn.com/disk.png"><br/>
-<font color='red'>到此就刷完系统了,将sd卡插入树莓派主板上去,接上电源就可以开机了</font></li>
-</ul>
-</li>
-<li>配置无线wifi
- 先使用网线把树莓派连接进局域网<br/>
- 我们使用一款free ip scanner来扫描局域网内的ip<br/>
- <img src="http://7xs6cr.com1.z0.glb.clouddn.com/IP_Scanner__4_devices_.png"><br/>
- 这样我们就可以使用ssd登录树莓派<br/>
- 使用用户名<font color="red">pi</font> 密码<font color="red">raspberry</font>来登录<br/>
- <img src="http://7xs6cr.com1.z0.glb.clouddn.com/1__pi_raspberrypi_____bash_.png">  <br/>
- 执行 sudo raspi-config 命令来扩充我们的filesystem<br/>
- <img src="http://7xs6cr.com1.z0.glb.clouddn.com/24_Mac%E4%B8%8B%E7%BB%99SD%E5%8D%A1%E5%AE%89%E8%A3%85%E6%A0%91%E8%8E%93%E6%B4%BERaspbian%E7%B3%BB%E7%BB%9F_%C2%B7_Issue__25_%C2%B7_c.png"><br/>
- 选择第一项 Expand FIlesystem 扩展SD卡上可用的空间
- 完成后选择finish
-
-<ul>
-<li>输入命令 dmesg | grep usb 来查看我们插入的usb 无线网卡的生产商
-查看到<font color="red"> Manufacturer: Realtek</font>这样的,例子举得是realtek的例子,如果我们之前插入了网线,我们可以上网的情况下 使用
-<font color='red'>apt-cache search realtek</font>命令
-看到类似<font color="red">firmware-realtek - Binary firmware for Realtek wired and wireless network adapters</font>后 使用 apt-get install  firmware-realtek 安装</li>
-<li>如果树莓派不能上网, 可以去<a href="http://mirrors.aliyun.com/raspbian/raspbian/pool/non-free/f/firmware-nonfree">http://mirrors.aliyun.com/raspbian/raspbian/pool/non-free/f/firmware-nonfree</a> 找到对应的网卡驱动然后使用<br/>
-<font color="red">sudo dpkg -i /tmp/firmware-realtek_0.43_all.deb</font>命令来安装<br/>
-*修改配置文件
-使用<font color="red">vi /etc/network/interfaces</font>打开配置文件<br/>
-去掉 auto wlan0 下面的配置,不要删除 auto wlan1下面的
-然后加上<br/>
-auto wlan0
-iface wlan0 inet dhcp
-wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf<br/>
-然后修改/etc/wpa_supplicant/wpa_supplicant.conf<br/>
-加上如下配置<br/>
-network={
-  ssid=&ldquo;你的SSID(无线网的名字)&rdquo;
-  key_mgmt=WPA-PSK
-  psk=&ldquo;WIFI密码&rdquo;
-}<br/>
-key_mgmt 参数如果无线网络没有密码或者是wep加密用NONE，否则则用WPA-PSK</li>
-</ul>
-</li>
-</ol>
-
-
-<p><img src="http://7xs6cr.com1.z0.glb.clouddn.com/qrcode_for_gh_6f7e12337ad2_258.jpg"></p>
-]]></content>
-  </entry>
   
   <entry>
     <title type="html"><![CDATA[new]]></title>
@@ -190,6 +120,76 @@ key_mgmt 参数如果无线网络没有密码或者是wep加密用NONE，否则�
         <span class="c1">//把方法直接作为一个arrow function的属性来定义，初始化的时候就绑定好了this指针</span>
     <span class="p">}</span>
 <span class="p">}</span></code></pre></div>
+
+
+<p><img src="http://7xs6cr.com1.z0.glb.clouddn.com/qrcode_for_gh_6f7e12337ad2_258.jpg"></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Raspberry1]]></title>
+    <link href="http://tmyk104117.github.io/blog/2016/04/03/raspberry1/"/>
+    <updated>2016-04-03T00:00:00+08:00</updated>
+    <id>http://tmyk104117.github.io/blog/2016/04/03/raspberry1</id>
+    <content type="html"><![CDATA[<ol>
+<li>安装
+
+<ul>
+<li>1.1 首先下载系统的img文件<a href="https://www.raspberrypi.org/downloads/raspbian/">系统下载地址</a></li>
+<li>1.2 将SD卡插入读卡器,然后将读卡器插入mac,使用df查看当前已经挂载的卷 <br/>
+<img src="http://7xs6cr.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-04-03%20%E4%B8%8B%E5%8D%883.17.02.png"><br/>
+因为已经命名了SD卡为Pi,所以SD卡得分区对应的设备文件为:/dev/disk2s1<br/>
+使用diskutil unmount命令来卸载刚刚插入的usb盘符
+<img src="http://7xs6cr.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7_2016-04-03_%E4%B8%8B%E5%8D%885_00_43.png"><br/>
+如图就是sd卡的盘符<br/>
+diskutil list 确认一下设备, 如图我们使用的是16G的卡<br/>
+<img src="http://7xs6cr.com1.z0.glb.clouddn.com/1064B971-F54A-4D82-8569-B6AB3138EEBD.png">
+我们使用dd命令来将下载到的img文件写到sdk里面去<br/>
+<img src="http://7xs6cr.com1.z0.glb.clouddn.com/24_Mac%E4%B8%8B%E7%BB%99SD%E5%8D%A1%E5%AE%89%E8%A3%85%E6%A0%91%E8%8E%93%E6%B4%BERaspbian%E7%B3%BB%E7%BB%9F_%C2%B7_Issue__25_%C2%B7_ccforward_cc.png"><br/>
+如图 /dev/disk2s1是分区,/dev/disk2是块设备,/dev/rdisk2是原始字符设备
+至此, SD卡已经刷入raspbian系统了<br/>
+再用diskutil unmountDisk卸载设备<br/>
+<img src="http://7xs6cr.com1.z0.glb.clouddn.com/disk.png"><br/>
+<font color='red'>到此就刷完系统了,将sd卡插入树莓派主板上去,接上电源就可以开机了</font></li>
+</ul>
+</li>
+<li>配置无线wifi
+ 先使用网线把树莓派连接进局域网<br/>
+ 我们使用一款free ip scanner来扫描局域网内的ip<br/>
+ <img src="http://7xs6cr.com1.z0.glb.clouddn.com/IP_Scanner__4_devices_.png"><br/>
+ 这样我们就可以使用ssd登录树莓派<br/>
+ 使用用户名<font color="red">pi</font> 密码<font color="red">raspberry</font>来登录<br/>
+ <img src="http://7xs6cr.com1.z0.glb.clouddn.com/1__pi_raspberrypi_____bash_.png">  <br/>
+ 执行 sudo raspi-config 命令来扩充我们的filesystem<br/>
+ <img src="http://7xs6cr.com1.z0.glb.clouddn.com/24_Mac%E4%B8%8B%E7%BB%99SD%E5%8D%A1%E5%AE%89%E8%A3%85%E6%A0%91%E8%8E%93%E6%B4%BERaspbian%E7%B3%BB%E7%BB%9F_%C2%B7_Issue__25_%C2%B7_c.png"><br/>
+ 选择第一项 Expand FIlesystem 扩展SD卡上可用的空间
+ 完成后选择finish
+
+<ul>
+<li>输入命令 dmesg | grep usb 来查看我们插入的usb 无线网卡的生产商
+查看到<font color="red"> Manufacturer: Realtek</font>这样的,例子举得是realtek的例子,如果我们之前插入了网线,我们可以上网的情况下 使用
+<font color='red'>apt-cache search realtek</font>命令
+看到类似<font color="red">firmware-realtek - Binary firmware for Realtek wired and wireless network adapters</font>后 使用 apt-get install  firmware-realtek 安装</li>
+<li>如果树莓派不能上网, 可以去<a href="http://mirrors.aliyun.com/raspbian/raspbian/pool/non-free/f/firmware-nonfree">http://mirrors.aliyun.com/raspbian/raspbian/pool/non-free/f/firmware-nonfree</a> 找到对应的网卡驱动然后使用<br/>
+<font color="red">sudo dpkg -i /tmp/firmware-realtek_0.43_all.deb</font>命令来安装<br/>
+*修改配置文件
+使用<font color="red">vi /etc/network/interfaces</font>打开配置文件<br/>
+去掉 auto wlan0 下面的配置,不要删除 auto wlan1下面的
+然后加上<br/>
+auto wlan0
+iface wlan0 inet dhcp
+wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf<br/>
+然后修改/etc/wpa_supplicant/wpa_supplicant.conf<br/>
+加上如下配置<br/>
+network={
+  ssid=&ldquo;你的SSID(无线网的名字)&rdquo;
+  key_mgmt=WPA-PSK
+  psk=&ldquo;WIFI密码&rdquo;
+}<br/>
+key_mgmt 参数如果无线网络没有密码或者是wep加密用NONE，否则则用WPA-PSK</li>
+</ul>
+</li>
+</ol>
 
 
 <p><img src="http://7xs6cr.com1.z0.glb.clouddn.com/qrcode_for_gh_6f7e12337ad2_258.jpg"></p>
