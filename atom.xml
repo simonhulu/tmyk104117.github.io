@@ -4,7 +4,7 @@
   <title><![CDATA[My Developer Path]]></title>
   <link href="http://tmyk104117.github.io/atom.xml" rel="self"/>
   <link href="http://tmyk104117.github.io/"/>
-  <updated>2016-04-07T10:43:56+08:00</updated>
+  <updated>2016-04-07T10:46:36+08:00</updated>
   <id>http://tmyk104117.github.io/</id>
   <author>
     <name><![CDATA[张诗杰]]></name>
@@ -22,7 +22,7 @@
 <li>安装
 
 <ul>
-<li>1.1 首先下载系统的img文件<a href="https://www.raspberrypi.org/downloads/raspbian/">系统下载地址</a></li>
+<li>1.1 首先下载系统的img文件<a href="https://www.raspberrypi.org/downloads/raspbian/" title="系统下载地址">系统下载地址</a></li>
 <li>1.2 将SD卡插入读卡器,然后将读卡器插入mac,使用df查看当前已经挂载的卷</li>
 </ul>
 
