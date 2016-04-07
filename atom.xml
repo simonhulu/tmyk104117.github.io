@@ -4,7 +4,7 @@
   <title><![CDATA[My Developer Path]]></title>
   <link href="http://tmyk104117.github.io/atom.xml" rel="self"/>
   <link href="http://tmyk104117.github.io/"/>
-  <updated>2016-04-07T10:38:34+08:00</updated>
+  <updated>2016-04-07T10:39:41+08:00</updated>
   <id>http://tmyk104117.github.io/</id>
   <author>
     <name><![CDATA[张诗杰]]></name>
@@ -27,7 +27,7 @@
 <img src="http://7xs6cr.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-04-03%20%E4%B8%8B%E5%8D%883.17.02.png" alt="使用df查看当前已经挂载的卷" />
 因为已经命名了SD卡为Pi,所以SD卡得分区对应的设备文件为:/dev/disk2s1<br/>
 使用diskutil unmount命令来卸载刚刚插入的usb盘符
-<img src="http://7xs6cr.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7_2016-04-03_%E4%B8%8B%E5%8D%885_00_43.png"><br/>
+<img src="http://7xs6cr.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7_2016-04-03_%E4%B8%8B%E5%8D%885_00_43.png" alt="使用diskutil unmount命令来卸载刚刚插入的usb盘符" />
 如图就是sd卡的盘符<br/>
 diskutil list 确认一下设备, 如图我们使用的是16G的卡<br/>
 <img src="http://7xs6cr.com1.z0.glb.clouddn.com/1064B971-F54A-4D82-8569-B6AB3138EEBD.png">
