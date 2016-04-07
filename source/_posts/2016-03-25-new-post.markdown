@@ -1,0 +1,8 @@
+---
+layout: post
+title: "好长时间没写博客了"
+date: 2016-03-25 19:03:09 +0800
+comments: true
+categories: 
+---
+总是三分钟热度,这个很困扰我

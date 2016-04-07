@@ -1,0 +1,173 @@
+---
+layout: post
+title: "React Native es5 es6对照表"
+date: 2016-04-01 16:53:26 +0800
+comments: true
+categories: 
+---
+# 模块 #
+ 在ES5里,使用CommmonJS标准,引入React包基本通过require进行
+ {% highlight js %}
+ //ES5
+ var React = require("react-native");
+ var {
+ 	Image,
+ 	Text,
+ 	PropTypes
+ }=React;//引用不同的ReactNative组件
+
+ //ES6
+ import React,{
+ 	Image,
+ 	Text,
+ 	PropTypes
+ }from 'react-native';
+ {% endhighlight js %}
+# 导出单个类 #
+在ES5里,要导出一个类给别的模块用,一般通过module.exports来导出
+ {% highlight js %}
+//ES5
+var MyComponent = React.createClass({
+	...
+});
+module.exports = MyComponent;
+{% endhighlight js %}
+在ES6里,通常用export default来实现相同的功能
+{% highlight js %}
+//ES6
+export default class MyComponent extends React.Component{
+	...
+}
+ {% endhighlight js %}
+引用的时候也类似
+ {% highlight js %}
+//ES5
+var MyComponent = require('./MyComponent.js')
+//ES6
+import MyComponent from './MyComponent.js'
+ {% endhighlight js %}
+
+# 定义组件 #
+在ES5里,通常通过React.createClass来定义一个组件类
+ {% highlight js %}
+//ES5
+var Photo = React.createClass({
+	render:function(){
+		return (
+			<Image source={this.props.source}/>
+			);
+	},
+});
+ {% endhighlight js %}
+在ES6里,我们通过定义一个继承自React.Component的class来定义一个组件类,
+//ES6
+ {% highlight js %}
+class Photo extends React.Component{
+	render(){
+		return(
+			<Image source={this.props.source}/>
+		);
+	}
+}
+{% endhighlight js %}
+# 给组件定义方法 # 
+从上面的例子可以看到,给组件定义方法不再用 <font color='red'>名字:function()</font>的写法,而是直接用 <font color="red">名字()</font>,在方法的后面也不能有逗号了
+{% highlight js %}
+//ES5
+var Photo = React.createClass({
+	componentWillMount:function(){
+
+	},
+	render:function(){
+		return (
+			<Image source={this.props.source}/>
+			);
+	},
+});
+
+//ES6
+class Photo extends React.Component{
+	componentWillMount(){
+
+	}
+	render(){
+		return <Image source={this.props.source}/>
+	}
+}
+{% endhighlight js %}
+# 定义组件的属性类型和默认属性 #
+在ES5里，属性类型和默认属性分别通过propTypes成员和getDefaulltProps方法来实现
+{% highlight js %}
+//
+var Video = React.createClass({
+	getDefaultProps:function(){
+		return {autoPlay:false,
+				maxLoops:10,}
+	},
+	propTypes:{
+		autoPlay:React.PropTypes.bool.isRequired,
+		maxLoops:React.PropTypes.number.isRequired,
+		posterFrameSrc:React.PropTypes.string.isRequired,
+		videoSrc:React.PropTypes.string.isRequired
+	},
+	render:function(){
+		return(
+		<View />
+		);
+	},
+})
+{% endhighlight js %}
+在ES6里,可以统一使用static成员来实现
+{% highlight js %}
+//ES6
+class Video extends React.Component{
+	static defaultProps = {
+		autoPlay:false,
+		maxLoops:10,
+	};
+	static propTypes ={
+		autoPlay:React.PropTypes.bool.isRequired,
+		maxLoops:React.PropTypes.number.isRequired,
+		posterFrameSrc:React.PropTypes.string.isRequired,
+		videoSrc:React.PropTypes.string.isRequired,
+	};
+	render(){
+		return(
+			<View />
+		);
+	}
+}
+}
+{% endhighlight js %}
+初始化STATE 
+{% highlight js %}
+//ES5
+var Video = React.createClass({
+	getInitialState:function(){
+		return{
+			loopRemaining:this.props.maxLoops,
+		};
+	},
+})
+{% endhighlight js %}
+ES6下有两种写法
+{% highlight js %}
+class Video extends React.Component{
+	state = {
+		loopsRemaining:this.props.maxLoops,
+	}
+}
+{% endhighlight js %}
+不过我们推荐更易理解的在构造函数中初始化(这样你还可以根据需要做一些计算)
+{% highlight js %}
+//ES6
+class Video extends React.Component{
+	constructor(props){
+		super(props);
+		this.state = {
+			loopsRemaining:this.props.maxLoops,
+		};
+	}
+}
+{% endhighlight js %}
+{% img http://7xs6cr.com1.z0.glb.clouddn.com/qrcode_for_gh_6f7e12337ad2_258.jpg %}
