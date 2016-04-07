@@ -4,7 +4,7 @@
   <title><![CDATA[My Developer Path]]></title>
   <link href="http://tmyk104117.github.io/atom.xml" rel="self"/>
   <link href="http://tmyk104117.github.io/"/>
-  <updated>2016-04-07T10:39:41+08:00</updated>
+  <updated>2016-04-07T10:40:45+08:00</updated>
   <id>http://tmyk104117.github.io/</id>
   <author>
     <name><![CDATA[张诗杰]]></name>
@@ -26,20 +26,22 @@
 <li>1.2 将SD卡插入读卡器,然后将读卡器插入mac,使用df查看当前已经挂载的卷<br/>
 <img src="http://7xs6cr.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-04-03%20%E4%B8%8B%E5%8D%883.17.02.png" alt="使用df查看当前已经挂载的卷" />
 因为已经命名了SD卡为Pi,所以SD卡得分区对应的设备文件为:/dev/disk2s1<br/>
-使用diskutil unmount命令来卸载刚刚插入的usb盘符
-<img src="http://7xs6cr.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7_2016-04-03_%E4%B8%8B%E5%8D%885_00_43.png" alt="使用diskutil unmount命令来卸载刚刚插入的usb盘符" />
-如图就是sd卡的盘符<br/>
-diskutil list 确认一下设备, 如图我们使用的是16G的卡<br/>
-<img src="http://7xs6cr.com1.z0.glb.clouddn.com/1064B971-F54A-4D82-8569-B6AB3138EEBD.png">
-我们使用dd命令来将下载到的img文件写到sdk里面去<br/>
-<img src="http://7xs6cr.com1.z0.glb.clouddn.com/24_Mac%E4%B8%8B%E7%BB%99SD%E5%8D%A1%E5%AE%89%E8%A3%85%E6%A0%91%E8%8E%93%E6%B4%BERaspbian%E7%B3%BB%E7%BB%9F_%C2%B7_Issue__25_%C2%B7_ccforward_cc.png"><br/>
-如图 /dev/disk2s1是分区,/dev/disk2是块设备,/dev/rdisk2是原始字符设备
-至此, SD卡已经刷入raspbian系统了<br/>
-再用diskutil unmountDisk卸载设备<br/>
-<img src="http://7xs6cr.com1.z0.glb.clouddn.com/disk.png"><br/>
-<font color='red'>到此就刷完系统了,将sd卡插入树莓派主板上去,接上电源就可以开机了</font></li>
+使用diskutil unmount命令来卸载刚刚插入的usb盘符</li>
 </ul>
-</li>
+
+
+<p> <img src="http://7xs6cr.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7_2016-04-03_%E4%B8%8B%E5%8D%885_00_43.png" alt="使用diskutil unmount命令来卸载刚刚插入的usb盘符" />
+ 如图就是sd卡的盘符<br/>
+ diskutil list 确认一下设备, 如图我们使用的是16G的卡</p>
+
+<p> <img src="http://7xs6cr.com1.z0.glb.clouddn.com/1064B971-F54A-4D82-8569-B6AB3138EEBD.png" alt="diskutil list 确认一下设备" />
+ 我们使用dd命令来将下载到的img文件写到sdk里面去<br/>
+ <img src="http://7xs6cr.com1.z0.glb.clouddn.com/24_Mac%E4%B8%8B%E7%BB%99SD%E5%8D%A1%E5%AE%89%E8%A3%85%E6%A0%91%E8%8E%93%E6%B4%BERaspbian%E7%B3%BB%E7%BB%9F_%C2%B7_Issue__25_%C2%B7_ccforward_cc.png"><br/>
+ 如图 /dev/disk2s1是分区,/dev/disk2是块设备,/dev/rdisk2是原始字符设备
+ 至此, SD卡已经刷入raspbian系统了<br/>
+ 再用diskutil unmountDisk卸载设备<br/>
+ <img src="http://7xs6cr.com1.z0.glb.clouddn.com/disk.png"><br/>
+ <font color='red'>到此就刷完系统了,将sd卡插入树莓派主板上去,接上电源就可以开机了</font></p></li>
 <li>配置无线wifi
  先使用网线把树莓派连接进局域网<br/>
  我们使用一款free ip scanner来扫描局域网内的ip<br/>
