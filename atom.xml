@@ -4,7 +4,7 @@
   <title><![CDATA[My Developer Path]]></title>
   <link href="http://tmyk104117.github.io/atom.xml" rel="self"/>
   <link href="http://tmyk104117.github.io/"/>
-  <updated>2016-04-07T12:42:51+08:00</updated>
+  <updated>2016-04-13T14:44:56+08:00</updated>
   <id>http://tmyk104117.github.io/</id>
   <author>
     <name><![CDATA[张诗杰]]></name>
@@ -12,6 +12,29 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[家庭无线开发的实现]]></title>
+    <link href="http://tmyk104117.github.io/blog/2016/04/13/new/"/>
+    <updated>2016-04-13T13:30:55+08:00</updated>
+    <id>http://tmyk104117.github.io/blog/2016/04/13/new</id>
+    <content type="html"><![CDATA[<p>妹子对我抱怨,为什么不能自动关灯呢,每次睡觉之前起来关灯,都特别烦人!妹子的要求必须无条件满足啊,所以特意去了解了一下目前控制开关的几种解决方案</p>
+
+<ul>
+<li>目前市场上有支持红外开关的开关,直接包含wifi模块的开关,或者其他无线模块,例如蓝牙,zigbee的开关,这几种各有优缺点
+
+<ul>
+<li>红外开关接收范围小,必须把红外发射模块对着开关</li>
+<li>wifi开关价格昂贵</li>
+<li>蓝牙和zigbee比较复杂</li>
+</ul>
+</li>
+<li>还有一种方案就是arduino和继电器再加上一个无线接收模块来实现,这样接收模块你可以自己选择,并且价钱可以控制再100元以内,如果家里面只配置主要的几个开关是完全可以接受的
+下面我们就来看看具体怎么实现</li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[树莓派安装教程 树莓派安装系统 raspberry pi]]></title>

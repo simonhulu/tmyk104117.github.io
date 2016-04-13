@@ -1,0 +1,172 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-cn">
+<head>
+	<meta charset="utf-8">
+	<title>家庭无线开发的实现 - My Developer Path</title>
+	<meta name="author" content="张诗杰">
+	
+  		<meta name="keywords" content="">
+	
+	
+	<meta name="description" content="妹子对我抱怨,为什么不能自动关灯呢,每次睡觉之前起来关灯,都特别烦人!妹子的要求必须无条件满足啊,所以特意去了解了一下目前控制开关的几种解决方案 目前市场上有支持红外开关的开关,直接包含wifi模块的开关,或者其他无线模块,例如蓝牙,zigbee的开关,这几种各有优缺点 红外开关接收范围小, &hellip;">
+	<meta name="keywords" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="baidu-site-verification" content="WzR4zZV5xp" />
+	<link href="/atom.xml" rel="alternate" title="My Developer Path" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	 <link href="/stylesheets/pygments.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script  src="/javascripts/seo.js"></script>
+	
+</head>
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">My Developer Path</a></h1>
+<nav id="main-nav"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="https://www.baidu.com" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:tmyk104117.github.io">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		
+    
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+    
+	</div>
+	<form class="search" action="https://www.baidu.com" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:tmyk104117.github.io">
+	</form>
+</nav>
+
+
+	</header>
+	
+		
+	
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">家庭无线开发的实现</h2>
+	<div class="entry-content"><p>妹子对我抱怨,为什么不能自动关灯呢,每次睡觉之前起来关灯,都特别烦人!妹子的要求必须无条件满足啊,所以特意去了解了一下目前控制开关的几种解决方案</p>
+
+<ul>
+<li>目前市场上有支持红外开关的开关,直接包含wifi模块的开关,或者其他无线模块,例如蓝牙,zigbee的开关,这几种各有优缺点
+
+<ul>
+<li>红外开关接收范围小,必须把红外发射模块对着开关</li>
+<li>wifi开关价格昂贵</li>
+<li>蓝牙和zigbee比较复杂</li>
+</ul>
+</li>
+<li>还有一种方案就是arduino和继电器再加上一个无线接收模块来实现,这样接收模块你可以自己选择,并且价钱可以控制再100元以内,如果家里面只配置主要的几个开关是完全可以接受的
+下面我们就来看看具体怎么实现</li>
+</ul>
+
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+Apr 13th, 2016</div>
+	<div class="tags">
+
+</div>
+	
+	<div class="comments"><a href="#disqus_thread">Comments</a></div>
+	
+</div>
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+		
+		
+		<a class="addthis_button_tweet"></a>
+		
+		
+		
+	</div>
+	
+</div>
+
+
+
+<section id="comment">
+    <h2 class="title">Comments</h2>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+	<footer id="footer" class="inner">Copyright &copy; 2016
+
+    张诗杰
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'qizhangblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://tmyk104117.github.io/blog/2016/04/13/new/';
+        var disqus_url = 'http://tmyk104117.github.io/blog/2016/04/13/new/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//go.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+</body>
+</html>
