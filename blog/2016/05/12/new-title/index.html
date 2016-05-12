@@ -1,0 +1,202 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-cn">
+<head>
+	<meta charset="utf-8">
+	<title>IOS cookie 操作 - My Developer Path</title>
+	<meta name="author" content="张诗杰">
+	
+  		<meta name="keywords" content="">
+	
+	
+	<meta name="description" content="ios上的cookie操作主要涉及NSHttpCookie和NSHTTPCookieStorage，当response有set-cookie命令时url loading syste,会自动设置cookies到适配对应的request,除非这个request指定不发送cookies &hellip;">
+	<meta name="keywords" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="baidu-site-verification" content="WzR4zZV5xp" />
+	<link href="/atom.xml" rel="alternate" title="My Developer Path" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	 <link href="/stylesheets/pygments.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script  src="/javascripts/seo.js"></script>
+	
+</head>
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">My Developer Path</a></h1>
+<nav id="main-nav"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="https://www.baidu.com" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:tmyk104117.github.io">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		
+    
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+    
+	</div>
+	<form class="search" action="https://www.baidu.com" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:tmyk104117.github.io">
+	</form>
+</nav>
+
+
+	</header>
+	
+		
+	
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">IOS Cookie 操作</h2>
+	<div class="entry-content"><p>ios上的cookie操作主要涉及NSHttpCookie和NSHTTPCookieStorage，当response有set-cookie命令时url loading syste,会自动设置cookies到适配对应的request,除非这个request指定不发送cookies
+NSHTTPCookieStorage 是用来管理NSHttpCookie的单例类,它是全局的，但是cookie不是共享的，每个app只能获得属于自己的cookie
+NSHTTPCookieStorage允许app指定cookie的接受规则，包括接受，从不接受和只接受从相同domain过来的cookie
+改变cookie的接受规则会影响到所有正在运行的app
+<strong> 获取cookie </strong></p>
+
+<div class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="bp">NSHTTPCookieStorage</span> <span class="o">*</span><span class="n">myCookie</span> <span class="o">=</span> <span class="p">[</span><span class="bp">NSHTTPCookieStorage</span> <span class="n">sharedHTTPCookieStorage</span><span class="p">];</span>  
+            <span class="k">for</span> <span class="p">(</span><span class="bp">NSHTTPCookie</span> <span class="o">*</span><span class="n">cookie</span> <span class="k">in</span> <span class="p">[</span><span class="n">myCookie</span> <span class="n">cookies</span><span class="p">])</span> <span class="p">{</span>  
+                <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@&quot;</span><span class="p">,</span> <span class="n">cookie</span><span class="p">);</span>  
+            <span class="p">}</span></code></pre></div>
+
+
+<p><strong> 保存cookie </strong></p>
+
+<div class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="bp">NSHTTPCookieStorage</span> <span class="o">*</span><span class="n">myCookie</span> <span class="o">=</span> <span class="p">[</span><span class="bp">NSHTTPCookieStorage</span> <span class="n">sharedHTTPCookieStorage</span><span class="p">];</span>  
+            <span class="k">for</span> <span class="p">(</span><span class="bp">NSHTTPCookie</span> <span class="o">*</span><span class="n">cookie</span> <span class="k">in</span> <span class="p">[</span><span class="n">myCookie</span> <span class="n">cookies</span><span class="p">])</span> <span class="p">{</span>  
+                <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@&quot;</span><span class="p">,</span> <span class="n">cookie</span><span class="p">);</span>  
+                <span class="p">[[</span><span class="bp">NSHTTPCookieStorage</span> <span class="n">sharedHTTPCookieStorage</span><span class="p">]</span> <span class="nl">setCookie</span><span class="p">:</span><span class="n">cookie</span><span class="p">];</span> <span class="c1">// 保存  </span>
+            <span class="p">}</span></code></pre></div>
+
+
+<p><strong>  将cookie设置到http request中 </strong></p>
+
+<div class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="c1">// 寻找URL为HOST的相关cookie，不用担心，步骤2已经自动为cookie设置好了相关的URL信息  </span>
+<span class="bp">NSArray</span> <span class="o">*</span><span class="n">cookies</span> <span class="o">=</span> <span class="p">[[</span><span class="bp">NSHTTPCookieStorage</span> <span class="n">sharedHTTPCookieStorage</span><span class="p">]</span> <span class="nl">cookiesForURL</span><span class="p">:[</span><span class="bp">NSURL</span> <span class="nl">URLWithString</span><span class="p">:</span><span class="n">HOST</span><span class="p">]];</span> <span class="c1">// 这里的HOST是你web服务器的域名地址  </span>
+<span class="c1">// 比如你之前登录的网站地址是abc.com（当然前面要加http://，如果你服务器需要端口号也可以加上端口号），那么这里的HOST就是http://abc.com  </span>
+  
+<span class="c1">// 设置header，通过遍历cookies来一个一个的设置header  </span>
+<span class="k">for</span> <span class="p">(</span><span class="bp">NSHTTPCookie</span> <span class="o">*</span><span class="n">cookie</span> <span class="k">in</span> <span class="n">cookies</span><span class="p">){</span>  
+  
+<span class="c1">// cookiesWithResponseHeaderFields方法，需要为URL设置一个cookie为NSDictionary类型的header，注意NSDictionary里面的forKey需要是@&quot;Set-Cookie&quot;  </span>
+        <span class="bp">NSArray</span> <span class="o">*</span><span class="n">headeringCookie</span> <span class="o">=</span> <span class="p">[</span><span class="bp">NSHTTPCookie</span> <span class="nl">cookiesWithResponseHeaderFields</span><span class="p">:</span>  
+                                    <span class="p">[</span><span class="bp">NSDictionary</span> <span class="nl">dictionaryWithObject</span><span class="p">:</span>  
+                                     <span class="p">[[</span><span class="bp">NSString</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithFormat</span><span class="p">:</span><span class="s">@&quot;%@=%@&quot;</span><span class="p">,[</span><span class="n">cookie</span> <span class="n">name</span><span class="p">],[</span><span class="n">cookie</span> <span class="n">value</span><span class="p">]]</span>  
+                                                                <span class="nl">forKey</span><span class="p">:</span><span class="s">@&quot;Set-Cookie&quot;</span><span class="p">]</span>  
+                                                                         <span class="nl">forURL</span><span class="p">:[</span><span class="bp">NSURL</span> <span class="nl">URLWithString</span><span class="p">:</span><span class="n">HOST</span><span class="p">]];</span>  
+  
+<span class="c1">// 通过setCookies方法，完成设置，这样只要一访问URL为HOST的网页时，会自动附带上设置好的header  </span>
+        <span class="p">[[</span><span class="bp">NSHTTPCookieStorage</span> <span class="n">sharedHTTPCookieStorage</span><span class="p">]</span> <span class="nl">setCookies</span><span class="p">:</span><span class="n">headeringCookie</span>  
+                                                           <span class="nl">forURL</span><span class="p">:[</span><span class="bp">NSURL</span> <span class="nl">URLWithString</span><span class="p">:</span><span class="n">HOST</span><span class="p">]</span>  
+                                                  <span class="nl">mainDocumentURL</span><span class="p">:</span><span class="nb">nil</span><span class="p">];</span>  
+    <span class="p">}</span></code></pre></div>
+
+
+
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+May 12th, 2016</div>
+	<div class="tags">
+
+</div>
+	
+	<div class="comments"><a href="#disqus_thread">Comments</a></div>
+	
+</div>
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+		
+		
+		<a class="addthis_button_tweet"></a>
+		
+		
+		
+	</div>
+	
+</div>
+
+
+
+<section id="comment">
+    <h2 class="title">Comments</h2>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+	<footer id="footer" class="inner">Copyright &copy; 2016
+
+    张诗杰
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'qizhangblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://tmyk104117.github.io/blog/2016/05/12/new-title/';
+        var disqus_url = 'http://tmyk104117.github.io/blog/2016/05/12/new-title/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//go.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+</body>
+</html>
